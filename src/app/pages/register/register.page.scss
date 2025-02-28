@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .logo-container img {
+    width: 100px;
+  }
+
+  .links-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  .links-container a {
+    color: var(--text-dark);
+    text-decoration: none;
+  }
