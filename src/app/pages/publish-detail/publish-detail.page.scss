@@ -1,0 +1,92 @@
+.custom-container {
+  --background: #f5f5f5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  height: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección izquierda */
+.left-section {
+  background: #3CCEC8;
+  color: white;
+  padding: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-section h1{
+  font-family: Fredoka One;
+  font-weight: 400;
+  font-size: 62px;
+  line-height: 100%;
+  letter-spacing: -3%;
+  vertical-align: middle;
+}
+
+.left-section p{
+  font-family: Anton;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 98%;
+  letter-spacing: -3%;
+  vertical-align: middle;
+}
+
+.icono {
+  top: 10px;
+  left: 263px;
+  width: 87px;
+  height: 84px;
+  margin-bottom: 20px;
+}
+
+/* Sección derecha */
+.right-section {
+  flex: 2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column; /* Organiza en columna */
+}
+
+/* Botones */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+ion-button {
+  --background: #D9D9D9 !important; /* Cambiar el fondo */
+  --border-radius: 8px !important;  /* Ajusta el borde */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  width: 45%;
+}
+
+.campoRe {
+  --background: #D9D9D9 !important; /* Cambiar el fondo */
+  --border-radius: 8px !important;  /* Ajusta el borde */
+  width: 100% !important;
+  height: 31px !important;
+  opacity: 0.85 !important;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  margin-bottom: 30px !important; /* Ajusta el valor según necesites */
+  overflow: visible !important;
+  /* Elimina el borde inferior */
+  --border-color: transparent !important;
+  --inner-border-width: 0 !important;
+}
+
+
+

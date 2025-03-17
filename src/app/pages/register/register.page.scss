@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+ion-content {
+  padding: 81px;
+}
+.register-container {
+  --background: #3CCEC8;
+  --border-radius: 16px;
+  width: 402px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Centra horizontalmente */
+  opacity: 0.8;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+}
+
+
   .logo-container {
     display: flex;
     justify-content: center;
@@ -16,7 +32,23 @@
     margin: 10px 0;
   }
 
-  .links-container a {
-    color: var(--text-dark);
-    text-decoration: none;
-  }
+.campoRe {
+  --background: #F2F2F2 !important; /* Cambiar el fondo */
+  --border-radius: 8px !important;  /* Ajusta el borde */
+  width: 345px !important;
+  height: 31px !important;
+  opacity: 0.85 !important;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  margin-bottom: 30px !important; /* Ajusta el valor según necesites */
+  overflow: visible !important;
+  /* Elimina el borde inferior */
+  --border-color: transparent !important;
+  --inner-border-width: 0 !important;
+}
+
+.upload-icon {
+  margin-left: auto;             /* Icono a la derecha */
+  font-size: 20px;               /* Tamaño del icono */
+  cursor: pointer;
+  color: #000; /* Asegúrate de que el color no sea transparente */
+}

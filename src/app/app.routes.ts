@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'publish',
     loadComponent: () => import('./pages/publish/publish.page').then( m => m.PublishPage)
   },
+  {
+    path: 'publish-detail',
+    loadComponent: () => import('./pages/publish-detail/publish-detail.page').then( m => m.PublishDetailPage)
+  },
 ];

@@ -1,27 +1,199 @@
-#container {
-  text-align: center;
+/* Toolbar */
+.custom-toolbar {
+  --background: #00A69F;
+  padding: 0;
+}
 
+/* Logo */
+.logo-img {
+  width: 67.37px;
+  height: 64px;
+}
+
+.rev-logo-text {
+  font-family: 'Fredoka One', sans-serif;
+  color: #F6DACD;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-weight: 400px;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -3%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Searchbar (normal) */
+.searchbar {
+  --background: #20837F;
+  width: 100%;
+  height: 36px;
+  box-shadow: none;
+  border-radius: 18px;
+  max-width: 307px;
+}
+
+/* Search icon (solo en pantallas pequeñas) */
+.search-icon {
+  display: none;
+  color: white;
+  font-size: 22px;
+}
+
+/* Buttons */
+.donations-btn,
+.baul-btn {
+  --background: #0D5D5A;
+  width: 97px;
+  height: 36px;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.baul-btn {
+  margin-left: 8px;
+}
+
+
+/* Profile Button */
+.profile-btn {
+  width: auto;  /* Permite que el botón se ajuste automáticamente */
+  height: auto; /* Permite que el botón se ajuste automáticamente */
+  color: white;
+  display: flex;
+  flex-direction: column; /* Alinea el icono encima del texto */
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: none; /* Fondo transparente si no lo deseas */
+  border: none; /* Sin borde */
+}
+
+/* Icono del perfil */
+.profile-icon {
+  font-size: 36px;  /* Tamaño adecuado del icono */
+  color: white;
+  margin-bottom: 4px; /* Espacio entre el icono y el texto */
+}
+
+/* Texto debajo del icono */
+.profile-text {
+  font-family: 'Freeman', sans-serif;
+  color: white;
+  font-size: 12px; /* Tamaño del texto */
+  text-align: center; /* Centra el texto */
+}
+
+/* Ocultar elementos en pantallas medianas y pequeñas */
+@media (max-width: 1024px) {
+  .hide-on-md {
+    display: none !important;
+  }
+  .show-on-md {
+    display: flex !important;
+  }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .hide-on-sm {
+    display: none !important;
+  }
+  .show-on-sm {
+    display: flex !important;
+  }
+}
+
+/* Ocultar elementos en pantallas grandes */
+@media (min-width: 1025px) {
+  .hide-on-lg {
+    display: none !important;
+  }
+}
+
+.categories-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Botón principal */
+.category-btn {
+  --background: #BFFFD4;
+  color: black;
+  font-family: 'Fredoka One', sans-serif;
+  font-weight: 400px;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: -3%;
+  text-align: center;
+  vertical-align: middle;
+  width: 137px;
+  height: 29px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+/* Contenedor de los sub-botones */
+.subcategories {
+  display: flex;
+  gap: 8px;
   position: absolute;
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  z-index: 1;
+  top: 0; /* Asegura que estén alineados verticalmente con Categorías */
+  height: 100%; /* Asegurar alineación */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* Botones de subcategorías */
+.subcategory-btn {
+  --background: #BFFFD4;
+  color: black;
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 13px;
+  width: 137px;
+  height: 29px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateX(0);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+/* Mostrar los botones con animación */
+.show:nth-child(1) {
+  transform: translateX(145px);
+  opacity: 1;
+  transition-delay: 0.1s;
 }
 
-#container a {
-  text-decoration: none;
+.show:nth-child(2) {
+  transform: translateX(290px);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.show:nth-child(3) {
+  transform: translateX(435px);
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Ocultar los botones con animación */
+.subcategory-btn:not(.show) {
+  transform: translateX(0);
+  opacity: 0;
 }
