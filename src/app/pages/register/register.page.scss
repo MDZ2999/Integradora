@@ -2,6 +2,7 @@
 
 ion-content {
   padding: 81px;
+  --background: #DBF9E9;
 }
 .register-container {
   --background: #3CCEC8;
@@ -52,3 +53,33 @@ ion-content {
   cursor: pointer;
   color: #000; /* Asegúrate de que el color no sea transparente */
 }
+.anton {
+  font-family: 'Anton', sans-serif;
+}
+.fredoka-one {
+  font-family: 'Fredoka One', sans-serif;
+}
+.custom-button {
+  width: 100%;
+  height: 80px;
+  background-color: #5ba9a8;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 50px 50px 0 0; /* Semicírculo arriba */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 502.82px; /* Ajusta este valor para mover el botón más abajo */
+
+}
+.register-button {
+  position: absolute;
+  bottom: -40px; /* Para que se superponga */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+

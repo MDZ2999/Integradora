@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card class="register-container">
     <ion-card-content>
-      <ion-title style="text-align: center; --color: #F6DACD;">REVEO</ion-title>
+      <ion-title style="text-align: center; --color: #F6DACD;" class="fredoka-one">REVEO</ion-title>
     </ion-card-content>
     <div class="logo-container">
       <img src="../../../assets/img/logo.png" alt="logo">
@@ -9,22 +9,22 @@
     <ion-card-content>
       <ion-list style="background-color:#3CCEC8;">
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Nombre" type="string" required></ion-input>
+          <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="string" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Apellido Paterno" type="string" required></ion-input>
+          <ion-input class="anton"  style="--color: #7C7C7C;" label="Apellido Paterno" type="string" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Apellido Materno" type="string" required></ion-input>
+          <ion-input class="anton"  style="--color: #7C7C7C;" label="Apellido Materno" type="string" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Correo" type="email" required></ion-input>
+          <ion-input class="anton"  style="--color: #7C7C7C;" label="Correo" type="email" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
+          <ion-input class="anton"  style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
-          <ion-input style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
+          <ion-input class="anton"  style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
         </ion-item>
         <ion-item class="campoRe">
           <ion-label style="--color: #7C7C7C;">Foto:</ion-label>
@@ -38,8 +38,11 @@
         <a style="color: #FDFFC7;" routerLink="/registro">Ya tienes una cuenta? Iniciar Sesion</a>
       </ion-col>
     </ion-row>
-    <div>
-      <ion-button expand="full">REGISTRARSE</ion-button>
-    </div>
+
+      <div class="register-button">
+    <button class="custom-button">REGISTRARSE</button>
+  </div>
+
   </ion-card>
+
 </ion-content>

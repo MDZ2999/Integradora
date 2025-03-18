@@ -1,17 +1,17 @@
 <ion-content class="ion-padding custom-container">
   <div class="form-container">
     <!-- Sección Izquierda -->
-    <div class="left-section">
-      <img src="../../../assets/img/sol.png" alt="Icono feliz" class="icono">
-      <h1>Empecemos a donar</h1>
-      <p>Estamos a tu disposición para ayudarte. <br>
-      Sigue los pasos y rellena los campos solicitados.</p>
+    <div class="left-section" style="position: relative;">
+      <img src="../../../assets/img/sol.png" alt="Icono feliz"  class="small-top-right">
+      <h1 style="color:#F6DACD;">Empecemos a donar</h1>
+      <p>Estamos a tu disposición para ayudarte. <br><br>
+      Sigue los pasos y rellena los campos <br><br>solicitados.</p>
     </div>
 
     <!-- Sección Derecha -->
     <div class="right-section">
       <ion-item class="campoRe">
-        <ion-label style="color:#7C7C7C;">Calidad</ion-label>
+        <ion-label class="anton" style="color:#7C7C7C;">Calidad:</ion-label>
         <ion-select style="color: black;" interface="popover" slot="end">
           <ion-select-option value="nuevo">Nuevo</ion-select-option>
           <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
@@ -20,15 +20,13 @@
       </ion-item>
 
 
-      <ion-item class="campoRe">
-        <ion-label style="color:#7C7C7C;" position="floating">Descripción:</ion-label>
-        <ion-textarea style="color: black;"></ion-textarea>
-      </ion-item>
-
+      <ion-item class="campoRe" lines="none">
+        <ion-input class="anton" label="Descripcion:" style="color:#7C7C7C; width: 100%;"></ion-input>
+    </ion-item>
       <!-- Botones -->
       <div class="button-container">
-        <ion-button>CANCELAR</ion-button>
-        <ion-button>ACEPTAR</ion-button>
+        <ion-button class="anton" style="color:#7C7C7C; width: 20%;">CANCELAR</ion-button>
+        <ion-button class="anton" style="color:#7C7C7C; width: 20%;" >ACEPTAR</ion-button>
       </div>
     </div>
   </div>

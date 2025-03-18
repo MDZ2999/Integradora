@@ -1,82 +1,68 @@
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <!-- Sección Izquierda -->
-      <ion-col size="12" size-md="4" class="left-section">
-        <div class="logo-container">
-          <img src="../../../assets/img/logo.png" alt="logo">
-        </div>
-        <h1>Empecemos a donar</h1>
-        <p>
-          Estamos a tu disposición para ayudarte. <br>
-          Sigue los pasos y rellena los campos solicitados.
-        </p>
-      </ion-col>
+<ion-content class="ion-padding custom-container">
+  <div class="form-container">
+    <!-- Sección Izquierda -->
+    <div class="left-section" style="position: relative;">
+      <img src="../../../assets/img/sol.png" alt="sol" class="small-top-right">
 
-      <!-- Sección Derecha -->
-      <ion-col size="12" size-md="8" class="right-section">
-        <ion-list>
-          <ion-item>
-            <ion-label position="floating">Imagen:</ion-label>
-            <br>
-            <ion-input type="file"></ion-input>
-          </ion-item>
+      <h1 class="fredoka-one" style="color:#F6DACD;">Empecemos a donar</h1>
+      <p class="anton">
+        Estamos a tu disposición para ayudarte. <br><br>
+        Sigue los pasos y rellena los campos solicitados.
+      </p>
+    </div>
+    <!-- Sección Derecha -->
+    <div class="right-section">
+      <ion-item class="campoRe">
+        <ion-label class="anton" style="color:#7C7C7C;">Imagen:</ion-label>
+        <ion-icon slot="end" name="cloud-upload-outline" onClick="document.getElementById('fileInput').click()" style="cursor: pointer;"></ion-icon>
+        <input type="file" id="fileInput" style="display: none;">
+      </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Nombre del producto:</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Cantidad:</ion-label>
-            <ion-input type="number"></ion-input>
-          </ion-item>
+      <ion-item class="campoRe" lines="none">
+          <ion-input class="anton" label="Nombre producto:" style="color:#7C7C7C; width: 100%;"></ion-input>
+      </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Categoria:</ion-label>
-            <ion-select style="color: black;" interface="popover" slot="end">
-              <ion-select-option value="nuevo">Nuevo</ion-select-option>
-              <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
-              <ion-select-option value="usado">Usado</ion-select-option>
-            </ion-select>
-          </ion-item>
+      <ion-item class="campoRe" lines="none">
+          <ion-input class="anton" label="Cantidad:" style="color:#7C7C7C; width: 100%;"></ion-input>
+      </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Subcategoria:</ion-label>
-            <ion-select style="color: black;" interface="popover" slot="end">
-              <ion-select-option value="nuevo">Nuevo</ion-select-option>
-              <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
-              <ion-select-option value="usado">Usado</ion-select-option>
-            </ion-select>
-          </ion-item>
+      <ion-item class="campoRe">
+        <ion-label class="anton" style="color:#7C7C7C;">Categoria:</ion-label>
+        <ion-select style="color: black;" interface="popover" slot="end">
+          <ion-select-option value="nuevo">Nuevo</ion-select-option>
+          <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
+          <ion-select-option value="usado">Usado</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Municipio:</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
+      <ion-item class="campoRe">
+        <ion-label class="anton" style="color:#7C7C7C;">Subcategoria:</ion-label>
+        <ion-select style="color: black;" interface="popover" slot="end">
+          <ion-select-option value="nuevo">Nuevo</ion-select-option>
+          <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
+          <ion-select-option value="usado">Usado</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Código Postal:</ion-label>
-            <ion-input type="number"></ion-input>
-          </ion-item>
+      <ion-item class="campoRe" lines="none">
+        <ion-input class="anton" label="Municipio:" style="color:#7C7C7C; width: 100%;"></ion-input>
+    </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Numero Telefonico</ion-label>
-            <ion-input type="number"></ion-input>
-          </ion-item>
-        </ion-list>
+      <ion-item class="campoRe" lines="none">
+        <ion-input class="anton" label="Codigo Postal:" style="color:#7C7C7C; width: 100%;"></ion-input>
+    </ion-item>
 
-        <!-- Botones -->
-        <ion-row class="button-group">
-          <ion-col size="6">
-            <ion-button expand="full" color="light">Cancelar</ion-button>
-          </ion-col>
-          <ion-col size="6" class="ion-text-end">
-            <ion-button expand="full" color="primary">Aceptar</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-item class="campoRe" lines="none">
+        <ion-input class="anton" label="Numero Telefonico:" style="color:#7C7C7C; width: 100%;"></ion-input>
+    </ion-item>
+
+
+      <!-- Botones -->
+      <div class="button-container">
+        <ion-button class="anton" style="color:#7C7C7C; width: 20%;">CANCELAR</ion-button>
+        <ion-button class="anton" style="color:#7C7C7C; width: 20%;" >ACEPTAR</ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
-
