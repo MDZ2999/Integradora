@@ -1,0 +1,55 @@
+<ion-toolbar class="custom-toolbar">
+  <!-- Izquierda -->
+  <ion-buttons slot="start">
+    <img src="../../../assets/img/logo.png" alt="Logo" class="logo-img"/>
+    <span class="rev-logo-text">REVEO</span>
+  </ion-buttons>
+
+  <!-- Derecha -->
+  <ion-buttons slot="end">
+    <ion-searchbar class="searchbar hide-on-sm"></ion-searchbar>
+    <ion-searchbar class="searchbarSM show-on-sm hide-on-lg hide-on-md"></ion-searchbar>
+
+    <!-- Botones visibles solo en pantallas grandes -->
+    <ion-button class="donations-btn hide-on-md">
+      MIS DONACIONES
+    </ion-button>
+
+    <ion-button class="baul-btn hide-on-md">
+      MI BAÚL
+    </ion-button>
+
+    <ion-button class="profile-btn hide-on-md">
+      <ion-icon name="person-circle" class="profile-icon"></ion-icon>
+      <span class="profile-text">Nombre Usuario</span>
+    </ion-button>
+
+    <!-- Botón de menú (Solo en medianas y pequeñas) -->
+    <ion-menu-button (click)="onClick()" class="menu-btn show-on-md hide-on-lg"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<!-- Menú lateral (Visible solo en medianas y pequeñas) -->
+<ion-menu side="end" contentId="main-content" menuId="home-toolbar-menu">
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item button>
+        <ion-icon name="heart-outline" class="profile-icon"></ion-icon>
+        <ion-label>MIS DONACIONES</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon name="cube-outline" class="profile-icon"></ion-icon>
+        <ion-label>MI BAÚL</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon name="person-circle" class="profile-icon"></ion-icon>
+        <ion-label>PERFIL</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Contenido principal -->
+<ion-content id="main-content">
+  <!-- Aquí va tu contenido principal -->
+</ion-content>

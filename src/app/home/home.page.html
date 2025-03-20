@@ -1,69 +1,62 @@
-<ion-toolbar class="custom-toolbar">
-  <!-- Izquierda -->
-  <ion-buttons slot="start">
-    <img src="../../../assets/img/logo.png" alt="Logo" class="logo-img"/>
-    <span class="rev-logo-text">REVEO</span>
-  </ion-buttons>
+<app-home-toolbar></app-home-toolbar>
 
-  <!-- Derecha -->
-  <ion-buttons slot="end">
-    <ion-searchbar class="searchbar hide-on-sm"></ion-searchbar>
-    <ion-button class="search-icon show-on-sm">
-      <ion-icon name="search-outline"></ion-icon>
-    </ion-button>
-
-    <!-- Botones visibles solo en pantallas grandes -->
-    <ion-button class="donations-btn hide-on-md">
-      MIS DONACIONES
-    </ion-button>
-
-    <ion-button class="baul-btn hide-on-md">
-      MI BAÚL
-    </ion-button>
-
-    <ion-button class="profile-btn hide-on-md">
-      <ion-icon name="person-circle" class="profile-icon"></ion-icon>
-      <span class="profile-text">Nombre Usuario</span>
-    </ion-button>
-
-    <!-- Botón de menú (Solo en medianas y pequeñas) -->
-    <ion-menu-button class="menu-btn show-on-md hide-on-lg"></ion-menu-button>
-  </ion-buttons>
-</ion-toolbar>
-
-<!-- Menú lateral (Visible solo en medianas y pequeñas) -->
-<ion-menu side="end" contentId="main-content">
+<!-- Menú lateral exclusivo para categorías en pantallas pequeñas -->
+<ion-menu side="start" contentId="home-content" menuId="category-menu">
   <ion-content class="ion-padding">
     <ion-list>
       <ion-item button>
-        <ion-icon name="heart-outline" class="profile-icon"></ion-icon>
-        <ion-label>MIS DONACIONES</ion-label>
+        <ion-label>Papelería</ion-label>
       </ion-item>
       <ion-item button>
-        <ion-icon name="cube-outline" class="profile-icon"></ion-icon>
-        <ion-label>MI BAÚL</ion-label>
+        <ion-label>Electrónica</ion-label>
       </ion-item>
       <ion-item button>
-        <ion-icon name="person-circle" class="profile-icon"></ion-icon>
-        <ion-label>PERFIL</ion-label>
+        <ion-label>Otros</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
+<!-- Contenedor de categorías (pantallas grandes y medianas) -->
+<ion-content id="home-content">
+  <ion-toolbar class="custom-toolbar">
+    <!-- Categorías a la izquierda -->
+    <div slot="start" class="categories-container">
+      <ion-button class="category-btn" (click)="toggleCategories()">
+        <ion-icon name="reorder-three-outline"></ion-icon>
+        <span>Categorías</span>
+      </ion-button>
 
-<ion-content id="main-content">
-  <div class="categories-container">
-    <!-- Botón principal -->
-    <ion-button class="category-btn" (click)="toggleCategories()">
-      <ion-icon name="reorder-three-outline"></ion-icon>
-      <span>Categorías</span>
-    </ion-button>
-
-    <!-- Contenedor de los botones secundarios -->
-    <div class="subcategories">
-      <ion-button class="subcategory-btn" [class.show]="showSubcategories">Papelería</ion-button>
-      <ion-button class="subcategory-btn" [class.show]="showSubcategories">Electrónica</ion-button>
-      <ion-button class="subcategory-btn" [class.show]="showSubcategories">Otros</ion-button>
+      <!-- Botones secundarios (solo en pantallas grandes y medianas) -->
+      <div class="subcategories">
+        <ion-button class="subcategory-btn" [class.show]="showSubcategories">Papelería</ion-button>
+        <ion-button class="subcategory-btn" [class.show]="showSubcategories">Electrónica</ion-button>
+        <ion-button class="subcategory-btn" [class.show]="showSubcategories">Otros</ion-button>
+      </div>
     </div>
-  </div>
+
+    <!-- Botón Donar a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button class="donate-btn" (click)="goToPublish()">
+        <ion-icon name="heart"></ion-icon>
+        Donar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" size-md="4" size-lg="4">
+        <ion-card class="custom-card">
+          <!-- Sección del usuario -->
+          <div class="user-info">
+            <img src="../../assets/img/Perfil.jpeg" alt="Usuario" class="user-avatar" />
+            <span class="user-name">Usuario</span>
+          </div>
+          <!-- Imagen principal -->
+          <img src="../../assets/img/card.jpeg" alt="Imagen principal" class="card-image" />
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
