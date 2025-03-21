@@ -14,13 +14,21 @@ import { cloudUploadOutline } from 'ionicons/icons';
     IonIcon, IonCard, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class RegisterPage implements OnInit {
+  fileName: string = ''; // Variable para almacenar el nombre del archivo seleccionado
 
   constructor() {
     addIcons({cloudUploadOutline});
   }
-
   openFileInput() {
-    document.getElementById('fileInput')?.click();
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click(); // Abre el selector de archivos
+  }
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.fileName = file.name; // Actualiza el nombre del archivo en el campo
+    }
   }
 
   ngOnInit() {

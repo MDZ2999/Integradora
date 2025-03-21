@@ -1,22 +1,134 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
+ion-content {
+  padding: 81px;
+  --background: #DBF9E9;
+}
 
-  .logo-container img {
-    width: 100px;
-  }
+.register-container {
+  position: absolute;
+  width: 402px;
+  height: 558px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  --background: #3CCEC8;
+  opacity: 0.8;
+  --border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: space-between; /* Espacia los elementos verticalmente */
+}
 
-  .links-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-  }
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: -110px; /* Mueve la imagen 20px hacia arriba */
+  width: 84px;
+  height: 80px;
+}
 
-  .links-container a {
-    color: var(--text-dark);
-    text-decoration: none;
-  }
+
+.forgot-password-link{
+  display: flex;
+  justify-content: space-between;
+  margin: -110px 0;
+  color: #FDFFC7; /* Color del texto */
+  font-family: 'Anton', sans-serif; /* Aplica la fuente Anton */
+  font-size: 11px; /* Ajusta el tamaño de la fuente */
+  width: 180px;
+  height: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.links-containers  {
+  display: flex;
+  justify-content: space-between;
+  margin: -110px 0;
+  color: #FDFFC7; /* Color del texto */
+  font-family: 'Anton', sans-serif; /* Aplica la fuente Anton */
+  font-size: 11px; /* Ajusta el tamaño de la fuente */
+  width: 170px;
+  height: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.campoRe {
+  --background: #F2F2F2 !important;
+  --border-radius: 8px !important;
+  width: 345px !important;
+  height: 32px !important;
+  opacity: 0.85 !important;
+  margin-bottom: 32px !important;
+  overflow: visible !important;
+  --border-color: transparent !important;
+  --inner-border-width: 0 !important;
+  
+}
+
+.campoRes {
+  --background: #F2F2F2 !important;
+  --border-radius: 8px !important;
+  width: 345px !important;
+  height: 31px !important;
+  opacity: 0.85 !important;
+  margin-bottom: 30px !important;
+  overflow: visible !important;
+  --border-color: transparent !important;
+  --inner-border-width: 0 !important;
+}
+
+
+.anton {
+  font-family: 'Anton', sans-serif;
+}
+
+.fredoka-one {
+  font-family: 'Fredoka One', sans-serif;
+  size: 27px;
+}
+
+.custom-button {
+  font-family: 'Anton', sans-serif;
+  position: absolute; /* Posiciona el botón dentro de la elipse */
+  width: 100%; /* Abarca todo el ancho de la elipse */
+  height: 70%; /* Abarca toda la altura de la elipse */
+  background-color: transparent; /* Hace el fondo del botón transparente */
+  color: white; /* Color del texto */
+  font-weight: bold;
+  font-size: 28px;
+  text-transform: uppercase;
+  border: none; /* Elimina el borde del botón */
+  display: flex;
+  align-items: center; /* Centra el texto verticalmente */
+  justify-content: center; /* Centra el texto horizontalmente */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+  z-index: 2; /* Asegura que el texto esté encima de la elipse */
+}
+
+.register-button {
+  position: relative;
+  margin-top: 20px; /* Espacio entre los enlaces y el botón */
+  width: 100%;
+}
+body {
+  background: #111;
+}
+
+.intersect-elipse {
+  position: absolute;
+  width: 402.15px;
+  height: 136.23px;
+  left: -185px; /* Centra la elipse horizontalmente dentro de la tarjeta */
+  bottom: -58px; /* Mueve la elipse hacia abajo para que solo se vea la mitad */
+  background: #0FB7B0;
+  border-radius: 50%; /* Hace que el div tenga forma de elipse */
+  z-index: 1; /* Asegura que la elipse esté detrás de otros elementos */
+}
+.form-container {
+  margin-top: -110px; /* Sube todo el formulario un poco más */
+
+}
