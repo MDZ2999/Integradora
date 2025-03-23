@@ -1,35 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonItem, IonLabel, IonTextarea, IonInput, IonRow, IonGrid, IonCol, IonList, IonSelect, IonSelectOption, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { cloudUploadOutline } from 'ionicons/icons';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { cloudUploadOutline, arrowBackOutline } from 'ionicons/icons';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-publish',
   templateUrl: './publish.page.html',
   styleUrls: ['./publish.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonList, IonCol, IonGrid, IonRow, IonInput, IonTextarea, IonLabel, IonItem,
-  IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
+  imports: [IonIcon, IonInput, IonLabel, IonItem, IonButton, IonContent, CommonModule, FormsModule, IonSelect,
   IonSelectOption],
-  animations: [
-    trigger('slideInFromRight', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('0.5s ease-in-out', style({ transform: 'translateX(0)' })),
-      ]),
-    ]),
-  ],
 })
 export class PublishPage implements OnInit {
+  isLeaving = false;
 
-  constructor() {
-    addIcons({ cloudUploadOutline });
+  constructor(private navCtrl: NavController) {
+    addIcons({arrowBackOutline,cloudUploadOutline});
   }
 
   ngOnInit() {
   }
 
+  goBack() {
+    this.isLeaving = true; // Activa la animación de salida
+    setTimeout(() => {
+      this.navCtrl.back(); // Navega después de la animación
+    }, 500);
+  }
 }

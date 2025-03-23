@@ -9,6 +9,7 @@
 .form-container {
   display: flex;
   min-height: 100%;
+  height: auto;
   background: white;
   border-radius: 12px;
   overflow: hidden;
@@ -24,6 +25,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+.back-icon {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .left-section h1{
@@ -45,69 +58,16 @@
 
 }
 
-.icono {
-  top: 10px;
-  left: 263px;
-  width: 87px;
-  height: 84px;
-  margin-bottom: 20px;
-}
-
 /* Sección derecha */
 .right-section {
   flex: 2;
   padding: 40px;
   display: flex;
-  flex-direction: column; /* Organiza en columna */
-}
-
-.back-icon {
-  position: absolute;
-  width: 46px;
-  height: 46px;
-  top: 20px;
-  left: 20px;
-  font-size: 24px;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-}
-
-/* Botones */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
-}
-
-ion-button {
-  --background: #D9D9D9 !important; /* Cambiar el fondo */
-  --border-radius: 8px !important;  /* Ajusta el borde */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  width: 45%;
-}
-
-.campoRe {
-  --background: #D9D9D9 !important; /* Cambiar el fondo */
-  --border-radius: 8px !important;  /* Ajusta el borde */
-  width: 100% !important;
-  height: auto !important;
-  opacity: 0.85 !important;
-  justify-content: space-between; /* Ajusta el contenido horizontalmente */
-  margin-bottom: 30px !important; /* Ajusta el valor según necesites */
-  overflow: visible !important;
-  /* Elimina el borde inferior */
-  --border-color: transparent !important;
-  --inner-border-width: 0 !important;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-ion-label {
-  flex: 1;
-}
-ion-icon {
-  margin-left: 10px;
-}
+
 .small-top-right {
   width: 100px;
   height: 100px;
@@ -115,11 +75,23 @@ ion-icon {
   top: 12px;
   right: 12px
 }
+
 .fredoka-one {
   font-family: 'Fredoka One', sans-serif;
 }
+
 .anton {
   font-family: 'Anton', sans-serif;
+}
+
+.register-text {
+  font-family: Anton;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: -3%;
+  text-align: center;
+  color: #7C7C7C;
 }
 
 @keyframes slideInFromRight {
@@ -134,7 +106,6 @@ ion-icon {
 .animacion-entrada {
   animation: slideInFromRight 0.5s ease-in-out;
 }
-
 
 /* Animación de salida */
 @keyframes slideOutToRight {
