@@ -1,4 +1,5 @@
 <ion-content>
+  
   <ion-card class="register-container">
     <ion-card-content>
       <ion-title style="text-align: center; --color: #F6DACD;" class="fredoka-one">REVEO</ion-title>
@@ -6,7 +7,8 @@
     <div class="logo-container">
       <img src="../../../assets/img/logo.png" alt="logo">
     </div>
-    <ion-card-content>
+    <ion-card-content class="register-form">
+
       <ion-list style="background-color:#3CCEC8;">
         <ion-item class="campoRe">
           <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="string" required></ion-input>
@@ -26,23 +28,36 @@
         <ion-item class="campoRe">
           <ion-input class="anton"  style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
         </ion-item>
+
         <ion-item class="campoRe">
-          <ion-label style="--color: #7C7C7C;">Foto:</ion-label>
-          <input type="file" id="fileInput" hidden>
+          <!-- El ion-input mostrará el nombre del archivo cargado -->
+          <ion-input
+            class="anton"
+            style="--color: #7C7C7C;"
+            label="Foto"
+            type="text"
+            [value]="fileName"
+            disabled>
+          </ion-input>
+          <!-- Input de archivo oculto -->
+          <input type="file" id="fileInput" hidden (change)="onFileSelected($event)">
+          <!-- Icono para abrir el selector de archivos -->
           <ion-icon name="cloud-upload-outline" class="upload-icon" (click)="openFileInput()"></ion-icon>
         </ion-item>
+
+        <ion-row class="links-container">
+          <ion-col style="text-align: right;">
+            <a style="color: #FDFFC7;" routerLink="/registro">Ya tienes una cuenta? Iniciar Sesion</a>
+          </ion-col>
+        </ion-row>
       </ion-list>
     </ion-card-content>
-    <ion-row class="links-container">
-      <ion-col style="text-align: right;">
-        <a style="color: #FDFFC7;" routerLink="/registro">Ya tienes una cuenta? Iniciar Sesion</a>
-      </ion-col>
-    </ion-row>
-
-      <div class="register-button">
-    <button class="custom-button">REGISTRARSE</button>
-  </div>
+    
+    <ion-card-content>
+      <div class="intersect-elipse">
+        <button class="custom-button">Iniciar Sesión</button>
+      </div>
+    </ion-card-content>
 
   </ion-card>
-
 </ion-content>

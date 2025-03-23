@@ -8,6 +8,8 @@ ion-content {
   --background: #3CCEC8;
   --border-radius: 16px;
   width: 402px;
+  height: 700px; /* Aumenta la altura de la tarjeta */
+
   position: absolute;
   left: 50%;
   transform: translateX(-50%); /* Centra horizontalmente */
@@ -21,10 +23,12 @@ ion-content {
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+    margin-top: -30px; /* Mueve la imagen 20px hacia arriba */
+
   }
 
   .logo-container img {
-    width: 100px;
+    width: 150px;
   }
 
   .links-container {
@@ -58,6 +62,7 @@ ion-content {
 }
 .fredoka-one {
   font-family: 'Fredoka One', sans-serif;
+  size: 27 px;
 }
 .custom-button {
   width: 100%;
@@ -82,4 +87,51 @@ ion-content {
   transform: translateX(-50%);
   width: 100%;
 }
+.upload-icon {
+  font-size: 24px;
+  color: #7C7C7C;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
+.campoRe ion-input {
+  width: calc(100% - 40px); /* Ajusta el ancho para dejar espacio al icono */
+}
+.register-form {
+  display: flex;
+  flex-direction: column; /* Organiza los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
+  margin: 0 auto; /* Centra el formulario horizontalmente */
+  width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho máximo del formulario */
+  box-sizing: border-box; /* Incluye el padding en el ancho total */
+  margin-top: -50px; /* Sube todo el formulario un poco más */
+
+}
+.intersect-elipse {
+  position: absolute;
+  width: 402.15px;
+  height: 136.23px;
+  left: -1px; /* Centra la elipse horizontalmente dentro de la tarjeta */
+  bottom: -100px; /* Mueve la elipse hacia abajo para que solo se vea la mitad */
+  background: #0FB7B0;
+  border-radius: 50%; /* Hace que el div tenga forma de elipse */
+  z-index: 1; /* Asegura que la elipse esté detrás de otros elementos */
+}
+.custom-button {
+  font-family: 'Anton', sans-serif;
+  width: 100%; /* Abarca todo el ancho de la elipse */
+  height: 70%; /* Abarca toda la altura de la elipse */
+  background-color: transparent; /* Hace el fondo del botón transparente */
+  color: white; /* Color del texto */
+  font-weight: bold;
+  font-size: 28px;
+  text-transform: uppercase;
+  border: none; /* Elimina el borde del botón */
+  display: flex;
+  align-items: center; /* Centra el texto verticalmente */
+  justify-content: center; /* Centra el texto horizontalmente */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+  z-index: 2; /* Asegura que el texto esté encima de la elipse */
+}
