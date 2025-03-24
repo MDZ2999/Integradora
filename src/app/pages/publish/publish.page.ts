@@ -5,6 +5,7 @@ import { IonContent, IonButton, IonItem, IonLabel, IonInput, IonSelect, IonSelec
 import { addIcons } from 'ionicons';
 import { cloudUploadOutline, arrowBackOutline } from 'ionicons/icons';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publish',
@@ -17,11 +18,16 @@ import { NavController } from '@ionic/angular';
 export class PublishPage implements OnInit {
   isLeaving = false;
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController, private router: Router) {
     addIcons({arrowBackOutline,cloudUploadOutline});
   }
 
   ngOnInit() {
+  }
+
+  goToPDetail(){
+    console.log("Aceptar Clicked");
+    this.router.navigate(['/publish-detail']);
   }
 
   goBack() {
