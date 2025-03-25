@@ -19,19 +19,19 @@
       MI BAÚL
     </ion-button>
 
-    <ion-button (click)="goToLogin()" class="toolbar-btn">
-      INICIAR SESIÓN
-    </ion-button>
-
-    <ion-button (click)="goToRegister()" class="toolbar-btn">
-      REGISTRARSE
-    </ion-button>
-
-    <ion-button class="profile-btn hide-on-md" *ngIf="isLoggedIn$ | async">
+    <ion-button class="profile-btn hide-on-md" *ngIf="isLoggedIn$ | async" (click)="openPopover($event)">
       <ion-icon name="person-circle" class="profile-icon"></ion-icon>
       <span class="profile-text">Nombre Usuario</span>
     </ion-button>
 
+    <!-- Botón de Iniciar Sesión (Se oculta si la sesión está iniciada) -->
+    <ion-button (click)="goToLogin()" class="toolbar-btn" *ngIf="!(isLoggedIn$ | async)">
+      INICIAR SESIÓN
+    </ion-button>
+    <!-- Botón de Registrarse -->
+    <ion-button (click)="goToRegister()" class="toolbar-btn" *ngIf="!(isLoggedIn$ | async)">
+      REGISTRARSE
+    </ion-button>
     <!-- Botón de menú (Solo en medianas y pequeñas) -->
     <ion-menu-button (click)="onClick()" class="menu-btn show-on-md hide-on-lg"></ion-menu-button>
   </ion-buttons>
@@ -53,11 +53,15 @@
         <ion-icon name="person-circle" class="profile-icon"></ion-icon>
         <ion-label>PERFIL</ion-label>
       </ion-item>
-      <ion-button (click)="goToLogin()">
+      <ion-item button (click)="logout()" *ngIf="isLoggedIn$ | async">
+        <ion-icon name="log-out-outline" class="profile-icon"></ion-icon>
+        <ion-label>CERRAR SESIÓN</ion-label>
+      </ion-item>
+      <ion-item (click)="goToLogin()" *ngIf="!(isLoggedIn$ | async)">
         <ion-icon name="log-in-outline" class="profile-icon"></ion-icon>
         <ion-label>INICIAR SESIÓN</ion-label>
-      </ion-button>
-      <ion-item button (click)="goToRegister()">
+      </ion-item>
+      <ion-item button (click)="goToRegister()" *ngIf="!(isLoggedIn$ | async)">
         <ion-icon name="person-add-outline" class="profile-icon"></ion-icon>
         <ion-label>REGISTRARSE</ion-label>
       </ion-item>
@@ -68,4 +72,19 @@
 <!-- Contenido principal -->
 <ion-content id="main-content">
   <!-- Aquí va tu contenido principal -->
+  <!-- Popover -->
+  <ion-popover [isOpen]="isPopoverOpen" [event]="popoverEvent" (didDismiss)="isPopoverOpen = false">
+    <ng-template>
+      <ion-list>
+        <ion-item button (click)="goToProfile()">
+          <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
+          <ion-label>Mi Perfil</ion-label>
+        </ion-item>
+        <ion-item button (click)="logout()">
+          <ion-icon name="log-out-outline" class="profile-icon"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+  </ion-popover>
 </ion-content>
