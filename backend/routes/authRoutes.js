@@ -20,7 +20,11 @@ router.post('/login', async (req, res) => {
     }
 
     // Si las credenciales son correctas, devolvemos una respuesta exitosa
-    res.status(200).json({ message: 'Inicio de sesión exitoso', usuarioId: usuario._id });
+    res.status(200).json({
+      message: 'Inicio de sesión exitoso',
+      usuarioId: usuario._id,
+      nombre: usuario.Nombre,
+    });
 
   } catch (error) {
     console.error(error);

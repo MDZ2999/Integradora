@@ -21,7 +21,7 @@
 
     <ion-button class="profile-btn hide-on-md" *ngIf="isLoggedIn$ | async" (click)="openPopover($event)">
       <ion-icon name="person-circle" class="profile-icon"></ion-icon>
-      <span class="profile-text">Nombre Usuario</span>
+      <span class="profile-text">{{ usuarioNombre$ | async }}</span>
     </ion-button>
 
     <!-- Botón de Iniciar Sesión (Se oculta si la sesión está iniciada) -->

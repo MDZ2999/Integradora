@@ -6,17 +6,18 @@ import { cubeOutline, heartOutline, logInOutline, logOutOutline, personAddOutlin
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home-toolbar',
   templateUrl: './home-toolbar.component.html',
   styleUrls: ['./home-toolbar.component.scss'],
   imports: [IonPopover, IonToolbar, IonContent, IonButtons, IonMenuButton, IonButton, IonIcon, IonLabel,
-    IonSearchbar, IonItem, IonMenu, IonList, CommonModule, IonSelect, IonSelectOption],
+    IonSearchbar, IonItem, IonMenu, IonList, CommonModule,],
 })
 export class HomeToolbarComponent  implements OnInit {
   isLoggedIn$ = this.authService.isLoggedIn;
   isPopoverOpen = false;
+  usuarioNombre$: Observable<string> = new Observable<string>();
   popoverEvent: any;
 
   constructor(private menuCtrl: MenuController,  private router: Router, private authService: AuthService) {
@@ -25,7 +26,9 @@ export class HomeToolbarComponent  implements OnInit {
       });
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usuarioNombre$ = this.authService.usuarioNombre$;
+  }
 
   onClick() {
     console.log('Menu clicked');
@@ -57,12 +60,12 @@ export class HomeToolbarComponent  implements OnInit {
     this.isPopoverOpen = true;
   }
 
-  // Redirigir a la página de perfil
+  // Redirigir a la página de perfil/-
   goToProfile() {
     this.isPopoverOpen = false;
     this.router.navigate(['/perfil']);
   }
-  // Cerrar sesión
+  // Cerrar sesión/
   logout() {
     this.isPopoverOpen = false;
     this.authService.logout();

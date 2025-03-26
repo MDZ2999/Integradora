@@ -7,7 +7,6 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -36,7 +35,8 @@ export class LoginPage implements OnInit {
         // Guardar estado de sesión
         localStorage.setItem('userLoggedIn', 'true');
         localStorage.setItem('usuarioId', response.usuarioId);
-        this.authService.updateSessionState(true);
+        localStorage.setItem('usuarioNombre', response.nombre);
+        this.authService.updateSessionState(true, response.nombre);
 
         Swal.fire({
           icon: 'success',

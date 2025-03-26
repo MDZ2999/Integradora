@@ -11,7 +11,7 @@ ion-content {
   height: 558px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   --background: #3CCEC8;
   opacity: 0.8;
   --border-radius: 12px;
@@ -30,19 +30,6 @@ ion-content {
   height: 80px;
 }
 
-
-.forgot-password-link{
-  display: flex;
-  justify-content: space-between;
-  margin: -110px 0;
-  color: #FDFFC7; /* Color del texto */
-  font-family: 'Anton', sans-serif; /* Aplica la fuente Anton */
-  font-size: 11px; /* Ajusta el tamaño de la fuente */
-  width: 180px;
-  height: 10px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
 .links-containers  {
   display: flex;
   justify-content: space-between;
@@ -66,7 +53,7 @@ ion-content {
   overflow: visible !important;
   --border-color: transparent !important;
   --inner-border-width: 0 !important;
-  
+
 }
 
 .campoRes {
@@ -114,6 +101,7 @@ ion-content {
   margin-top: 20px; /* Espacio entre los enlaces y el botón */
   width: 100%;
 }
+
 body {
   background: #111;
 }
@@ -128,7 +116,7 @@ body {
   border-radius: 50%; /* Hace que el div tenga forma de elipse */
   z-index: 1; /* Asegura que la elipse esté detrás de otros elementos */
 }
+
 .form-container {
   margin-top: -110px; /* Sube todo el formulario un poco más */
-
 }
