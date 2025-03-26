@@ -1,0 +1,46 @@
+<ion-content>
+  <div class="profile-container">
+    <!-- Sección de perfil -->
+    <div class="profile-header">
+      <div class="avatar-container">
+        <ion-avatar class="profile-avatar">
+          <img [src]="profileImage || 'assets/img/default-avatar.png'" alt="Foto de perfil">
+        </ion-avatar>
+        <ion-button class="change-photo-btn" fill="clear" (click)="selectImage()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="profile-info">
+        <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
+          <!-- Campos de información personal -->
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="userData.nombre" name="nombre" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Apellido Paterno</ion-label>
+            <ion-input [(ngModel)]="userData.apellidoPaterno" name="apellidoPaterno" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Apellido Materno</ion-label>
+            <ion-input [(ngModel)]="userData.apellidoMaterno" name="apellidoMaterno" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input [(ngModel)]="userData.correo" name="correo" type="email" required></ion-input>
+          </ion-item>
+
+          <!-- Botón de guardar cambios -->
+          <ion-button expand="block" type="submit" [disabled]="!profileForm.valid || isLoading">
+            <ion-spinner *ngIf="isLoading"></ion-spinner>
+            <span *ngIf="!isLoading">Guardar Cambios</span>
+          </ion-button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

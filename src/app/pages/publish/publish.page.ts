@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   IonSelectOption],
 })
 export class PublishPage implements OnInit {
+  fileName: string = ''; // Variable para almacenar el nombre del archivo seleccionado
   isLeaving = false;
 
   constructor(private navCtrl: NavController, private router: Router) {
@@ -23,6 +24,17 @@ export class PublishPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  openFileInput() {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click(); // Abre el selector de archivos
+  }
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.fileName = file.name; // Actualiza el nombre del archivo en el campo
+    }
   }
 
   goToPDetail(){

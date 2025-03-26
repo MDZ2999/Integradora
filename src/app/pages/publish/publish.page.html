@@ -14,11 +14,20 @@
     <!-- Sección Derecha -->
     <div class="right-section">
       <ion-item class="campoRe">
-        <ion-label class="anton" style="color:#7C7C7C;">Imagen:</ion-label>
-        <ion-icon slot="end" name="cloud-upload-outline" onClick="document.getElementById('fileInput').click()" style="cursor: pointer;"></ion-icon>
-        <input type="file" id="fileInput" style="display: none;">
+        <!-- El ion-input mostrará el nombre del archivo cargado -->
+        <ion-input
+          class="anton"
+          style="--color: #7C7C7C;"
+          label="Foto"
+          type="text"
+          [value]="fileName"
+          >
+        </ion-input>
+        <!-- Input de archivo oculto -->
+        <input type="file" id="fileInput" hidden (change)="onFileSelected($event)">
+        <!-- Icono para abrir el selector de archivos -->
+        <ion-icon name="cloud-upload-outline" class="upload-icon" (click)="openFileInput()"></ion-icon>
       </ion-item>
-
 
       <ion-item class="campoRe" lines="none">
           <ion-input class="anton" label="Nombre producto:" style="color:#7C7C7C; width: 100%;"></ion-input>
@@ -30,19 +39,19 @@
 
       <ion-item class="campoRe">
         <ion-label class="anton" style="color:#7C7C7C;">Categoria:</ion-label>
-        <ion-select style="color: black;" interface="popover" slot="end">
-          <ion-select-option value="nuevo">Nuevo</ion-select-option>
-          <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
-          <ion-select-option value="usado">Usado</ion-select-option>
+        <ion-select style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
+          <ion-select-option class="anton_option" value="nuevo">Nuevo</ion-select-option>
+          <ion-select-option class="anton_option" value="seminuevo">Seminuevo</ion-select-option>
+          <ion-select-option class="anton_option" value="usado">Usado</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="campoRe">
         <ion-label class="anton" style="color:#7C7C7C;">Subcategoria:</ion-label>
-        <ion-select style="color: black;" interface="popover" slot="end">
-          <ion-select-option value="nuevo">Nuevo</ion-select-option>
-          <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
-          <ion-select-option value="usado">Usado</ion-select-option>
+        <ion-select style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
+          <ion-select-option class="anton_option" value="nuevo">Nuevo</ion-select-option>
+          <ion-select-option class="anton_option" value="seminuevo">Seminuevo</ion-select-option>
+          <ion-select-option class="anton_option" value="usado">Usado</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -61,8 +70,8 @@
 
       <!-- Botones -->
       <div class="button-container">
-        <ion-button class="anton" style="color:#7C7C7C; width: 20%;">CANCELAR</ion-button>
-        <ion-button (click)="goToPDetail()" class="anton" style="color:#7C7C7C; width: 20%;" >ACEPTAR</ion-button>
+        <ion-button class="anton" style="color:#7C7C7C; width: auto;">CANCELAR</ion-button>
+        <ion-button (click)="goToPDetail()" class="anton" style="color:#7C7C7C; width: auto;" >ACEPTAR</ion-button>
       </div>
     </div>
   </div>

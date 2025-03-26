@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { IonContent, IonCol, IonTitle, IonInput, IonItem, IonList, IonCard, IonCardContent,
-  IonRow} from '@ionic/angular/standalone';
+  IonRow, IonIcon } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonRow, IonCol, IonCardContent, IonCard, IonList, IonItem, IonInput, IonContent,
+  imports: [IonIcon, IonRow, IonCol, IonCardContent, IonCard, IonList, IonItem, IonInput, IonContent,
     IonTitle, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginPage implements OnInit {
@@ -70,7 +69,7 @@ export class LoginPage implements OnInit {
       }
     });
   }
-
+ 
   ngOnInit() {
   }
 

@@ -1,5 +1,5 @@
 <ion-content>
-  
+
   <ion-card class="register-container">
     <ion-card-content>
       <ion-title style="text-align: center; --color: #F6DACD;" class="fredoka-one">REVEO</ion-title>
@@ -37,7 +37,7 @@
             label="Foto"
             type="text"
             [value]="fileName"
-            disabled>
+            >
           </ion-input>
           <!-- Input de archivo oculto -->
           <input type="file" id="fileInput" hidden (change)="onFileSelected($event)">
@@ -47,9 +47,11 @@
 
         <ion-row class="links-container">
           <ion-col style="text-align: right;">
-            <a style="color: #FDFFC7;" routerLink="/registro">Ya tienes una cuenta? Iniciar Sesion</a>
+            <!-- Cambia el routerLink para que apunte a la página de login -->
+            <a style="color: #FDFFC7;" routerLink="/login">¿Ya tienes una cuenta? Iniciar Sesión</a>
           </ion-col>
         </ion-row>
+
       </ion-list>
     </ion-card-content>
     

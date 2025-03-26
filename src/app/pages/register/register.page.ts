@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonCard,
-  IonIcon,IonCardContent, IonItem, IonInput, IonRow, IonCol, IonButton, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonTitle, IonList, IonCard,
+  IonIcon,IonCardContent, IonItem, IonInput, IonRow, IonCol } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { cloudUploadOutline } from 'ionicons/icons';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonButton, IonCol, IonRow, IonInput, IonItem, IonCardContent,
-    IonIcon, IonCard, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [ IonCol, IonRow, IonInput, IonItem, IonCardContent,RouterLink,
+    IonIcon, IonCard, IonList, IonContent, IonTitle, CommonModule, FormsModule]
 })
 export class RegisterPage implements OnInit {
   fileName: string = ''; // Variable para almacenar el nombre del archivo seleccionado
