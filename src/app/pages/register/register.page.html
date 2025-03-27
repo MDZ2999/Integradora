@@ -7,7 +7,7 @@
       <img src="../../../assets/img/logo.png" alt="logo">
     </div>
     <ion-card-content class="register-form">
-      <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <form #registerForm="ngForm">
         <ion-list style="background-color:#3CCEC8;">
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="text" 
@@ -41,19 +41,20 @@
             <ion-icon name="cloud-upload-outline" class="upload-icon" (click)="openFileInput()"></ion-icon>
           </ion-item>
 
-          <div class="button-container">
-            <ion-button type="submit" class="custom-button" [disabled]="!registerForm.valid">
-              REGISTRARSE
-            </ion-button>
-          </div>
-
           <ion-row class="links-container">
             <ion-col style="text-align: right;">
-              <a style="color: #FDFFC7;" routerLink="/login">¿Ya tienes una cuenta? Iniciar Sesion</a>
+              <a style="color: #FDFFC7;" (click)="goToLogin()">¿Ya tienes una cuenta? Iniciar Sesion</a>
             </ion-col>
           </ion-row>
         </ion-list>
       </form>
+    </ion-card-content>
+    <ion-card-content>
+      <div class="intersect-elipse">
+        <button class="custom-button" [disabled]="!registerForm.valid" (click)="register()">
+          REGISTRARSE
+        </button>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

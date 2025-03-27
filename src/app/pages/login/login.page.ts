@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCol, IonTitle, IonInput, IonItem, IonList, IonCard, IonCardContent,
-  IonRow, IonIcon, IonButton } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -12,14 +11,17 @@ import Swal from 'sweetalert2';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonRow, IonCol, IonCardContent, IonCard, IonList, IonItem, IonInput, IonContent,
-    IonTitle, CommonModule, FormsModule, IonButton]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
   correo: string = '';
   contrasena: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 
   login() {
     if (!this.correo || !this.contrasena) {

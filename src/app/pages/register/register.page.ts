@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { IonContent, IonTitle, IonList, IonCard, 
-  IonIcon, IonCardContent, IonItem, IonInput, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { cloudUploadOutline } from 'ionicons/icons';
-import { RouterLink, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -14,12 +11,9 @@ import Swal from 'sweetalert2';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [ IonCol, IonRow, IonInput, IonItem, IonCardContent, RouterLink, 
-    IonIcon, IonCard, IonList, IonContent, IonTitle, CommonModule, FormsModule, IonButton ]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class RegisterPage implements OnInit {
-  fileName: string = '';
-  selectedFile: File | null = null;
+export class RegisterPage {
   usuario = {
     Nombre: '',
     Apellido_paterno: '',
@@ -28,45 +22,33 @@ export class RegisterPage implements OnInit {
     Contrasena: '',
     confirmarContrasena: ''
   };
+  
+  fileName: string = '';
+  selectedFile: File | null = null;
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {
-    addIcons({cloudUploadOutline});
+  ) {}
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
   openFileInput() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
+    document.getElementById('fileInput')?.click();
   }
 
-  onFileSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0];
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
     if (file) {
-      this.fileName = file.name;
       this.selectedFile = file;
+      this.fileName = file.name;
     }
   }
 
-  async onSubmit() {
-    if (!this.usuario.Nombre || !this.usuario.Apellido_paterno || !this.usuario.Correo || !this.usuario.Contrasena) {
-      await Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Por favor, completa todos los campos requeridos',
-        backdrop: false
-      });
-      return;
-    }
-
-    if (this.usuario.Contrasena !== this.usuario.confirmarContrasena) {
-      await Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Las contrasenas no coinciden',
-        backdrop: false
-      });
+  register() {
+    if (!this.validateForm()) {
       return;
     }
 
@@ -82,28 +64,50 @@ export class RegisterPage implements OnInit {
     }
 
     this.authService.register(formData).subscribe({
-      next: async (response) => {
-        await Swal.fire({
-          icon: 'success',
+      next: (response) => {
+        Swal.fire({
           title: '¡Registro exitoso!',
-          text: 'Redirigiendo al inicio de sesion...',
-          timer: 2000,
-          showConfirmButton: false,
+          text: 'Tu cuenta ha sido creada correctamente',
+          icon: 'success',
           backdrop: false
+        }).then(() => {
+          this.router.navigate(['/login']);
         });
-        this.router.navigate(['/login']);
       },
-      error: async (error) => {
-        await Swal.fire({
-          icon: 'error',
+      error: (error) => {
+        console.error('Error completo:', error);
+        Swal.fire({
           title: 'Error',
-          text: error.error.message || 'Error al registrar usuario',
+          text: error.error?.message || 'Error al registrar usuario',
+          icon: 'error',
           backdrop: false
         });
       }
     });
   }
 
-  ngOnInit() {
+  private validateForm(): boolean {
+    if (!this.usuario.Nombre || !this.usuario.Apellido_paterno || !this.usuario.Apellido_materno || 
+        !this.usuario.Correo || !this.usuario.Contrasena || !this.usuario.confirmarContrasena) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, complete todos los campos',
+        icon: 'error',
+        backdrop: false
+      });
+      return false;
+    }
+
+    if (this.usuario.Contrasena !== this.usuario.confirmarContrasena) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Las contraseñas no coinciden',
+        icon: 'error',
+        backdrop: false
+      });
+      return false;
+    }
+
+    return true;
   }
 }
