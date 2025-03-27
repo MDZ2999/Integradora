@@ -45,18 +45,11 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" size-md="4" size-lg="4">
-        <ion-card class="custom-card">
-          <!-- Sección del usuario -->
-          <div class="user-info">
-            <img src="../../assets/img/Perfil.jpeg" alt="Usuario" class="user-avatar" />
-            <span class="user-name">Usuario</span>
-          </div>
-          <!-- Imagen principal -->
-          <img src="../../assets/img/card.jpeg" alt="Imagen principal" class="card-image" />
-        </ion-card>
-
-      </ion-col>
+      @for (producto of productos; track producto._id) {
+        <ion-col size="6" size-md="4" size-lg="4">
+          <app-product-card [producto]="producto"></app-product-card>
+        </ion-col>
+      }
     </ion-row>
   </ion-grid>
 </ion-content>
