@@ -33,5 +33,13 @@ export const routes: Routes = [
   {
     path: 'donaciones',
     loadComponent: () => import('./pages/donaciones/donaciones.page').then( m => m.DonacionesPage)
+  },  {
+    path: 'perfil',
+    loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
   },
+  {
+    path: 'configure-perfil',
+    loadComponent: () => import('./pages/configure-perfil/configure-perfil.page').then( m => m.ConfigurePerfilPage)
+  },
+
 ];

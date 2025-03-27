@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { IonContent, IonCol, IonTitle, IonInput, IonItem, IonList, IonCard, IonCardContent,
-  IonRow} from '@ionic/angular/standalone';
+  IonRow, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonRow, IonCol, IonCardContent, IonCard, IonList, IonItem, IonInput, IonContent,
-    IonTitle, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonIcon, IonRow, IonCol, IonCardContent, IonCard, IonList, IonItem, IonInput, IonContent,
+    IonTitle, CommonModule, FormsModule, IonButton]
 })
 export class LoginPage implements OnInit {
   correo: string = '';
@@ -22,31 +22,33 @@ export class LoginPage implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    console.log('Correo:', this.correo);
-    console.log('Contraseña:', this.contrasena);
-
     if (!this.correo || !this.contrasena) {
-      Swal.fire('Error', 'Por favor, completa todos los campos.', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Por favor, completa todos los campos',
+        backdrop: false
+      });
       return;
     }
 
-    this.authService.login(this.correo, this.contrasena).subscribe({
+    this.authService.login(this.correo.toLowerCase(), this.contrasena.toLowerCase()).subscribe({
       next: (response) => {
         // Guardar estado de sesión
         localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('usuarioId', response.usuarioId);
-        localStorage.setItem('usuarioNombre', response.nombre);
-        this.authService.updateSessionState(true, response.nombre);
+        localStorage.setItem('usuarioId', response.usuario.id);
+        localStorage.setItem('usuarioNombre', response.usuario.nombre);
+        this.authService.updateSessionState(true, response.usuario.nombre);
 
         Swal.fire({
           icon: 'success',
           title: 'Inicio de sesión exitoso',
           text: 'Redirigiendo...',
-          timer: 2000,  // Tiempo antes de redirigir
+          timer: 2000,
           showConfirmButton: false,
-          backdrop: false  // Evita que la pantalla se oscurezca completamente
+          backdrop: false
         }).then(() => {
-          window.location.href = '/home';  // O la ruta de tu página home
+          this.router.navigate(['/home']);
         });
       },
       error: (error) => {
@@ -66,12 +68,10 @@ export class LoginPage implements OnInit {
           text: mensaje,
           backdrop: false
         });
-
       }
     });
   }
 
   ngOnInit() {
   }
-
 }

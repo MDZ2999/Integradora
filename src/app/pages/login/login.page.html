@@ -12,32 +12,38 @@
 
     <!-- Formulario -->
     <ion-card-content class="form-container">
-      <ion-list style="background-color:#3CCEC8;">
-        <ion-item class="campoRe">
-          <ion-input class="anton" style="--color: #7C7C7C;" placeholder="Correo:" type="email" [(ngModel)]="correo" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRes">
-          <ion-input class="anton" style="--color: #7C7C7C;" placeholder="Contraseña:" type="password" [(ngModel)]="contrasena" required></ion-input>
-        </ion-item>
-      </ion-list>
+      <form #loginForm="ngForm" (ngSubmit)="login()">
+        <ion-list style="background-color:#3CCEC8;">
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Correo" type="email" 
+              [(ngModel)]="correo" name="correo" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRes">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Contraseña" type="password"
+              [(ngModel)]="contrasena" name="contrasena" required></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
     </ion-card-content>
 
     <!-- Enlaces -->
     <ion-card-content>
-      <ion-row >
-        <ion-col >
-          <a  class="links-containers">¿Ha olvidado su contraseña?</a>
+      <ion-row class="links-container">
+        <ion-col>
+          <a class="links-containers">¿Ha olvidado su contraseña?</a>
         </ion-col>
         <ion-col>
-          <a href="/register" class="links-containers">¿No tienes una cuenta? Regístrate</a>
+          <a routerLink="/register" class="links-containers">¿No tienes una cuenta? Regístrate</a>
         </ion-col>
       </ion-row>
     </ion-card-content>
 
     <!-- Botón de inicio de sesión -->
     <ion-card-content>
-      <div class="intersect-elipse">
-        <button class="custom-button" (click)="login()">Iniciar Sesión</button>
+      <div class="button-container">
+        <ion-button type="submit" class="custom-button" [disabled]="!loginForm.valid" (click)="login()">
+          Iniciar Sesión
+        </ion-button>
       </div>
     </ion-card-content>
 

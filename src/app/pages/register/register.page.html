@@ -1,5 +1,4 @@
 <ion-content>
-
   <ion-card class="register-container">
     <ion-card-content>
       <ion-title style="text-align: center; --color: #F6DACD;" class="fredoka-one">REVEO</ion-title>
@@ -8,56 +7,53 @@
       <img src="../../../assets/img/logo.png" alt="logo">
     </div>
     <ion-card-content class="register-form">
+      <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <ion-list style="background-color:#3CCEC8;">
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="text" 
+              [(ngModel)]="usuario.Nombre" name="nombre" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Apellido Paterno" type="text"
+              [(ngModel)]="usuario.Apellido_paterno" name="apellidoPaterno" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Apellido Materno" type="text"
+              [(ngModel)]="usuario.Apellido_materno" name="apellidoMaterno" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Correo" type="email"
+              [(ngModel)]="usuario.Correo" name="correo" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Contrasena" type="password"
+              [(ngModel)]="usuario.Contrasena" name="contrasena" required></ion-input>
+          </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Confirmar Contrasena" type="password"
+              [(ngModel)]="usuario.confirmarContrasena" name="confirmarContrasena" required></ion-input>
+          </ion-item>
 
-      <ion-list style="background-color:#3CCEC8;">
-        <ion-item class="campoRe">
-          <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="string" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRe">
-          <ion-input class="anton"  style="--color: #7C7C7C;" label="Apellido Paterno" type="string" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRe">
-          <ion-input class="anton"  style="--color: #7C7C7C;" label="Apellido Materno" type="string" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRe">
-          <ion-input class="anton"  style="--color: #7C7C7C;" label="Correo" type="email" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRe">
-          <ion-input class="anton"  style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
-        </ion-item>
-        <ion-item class="campoRe">
-          <ion-input class="anton"  style="--color: #7C7C7C;" label="Contraseña" type="password" required></ion-input>
-        </ion-item>
+          <ion-item class="campoRe">
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Imagen" type="text"
+              [value]="fileName" readonly></ion-input>
+            <input type="file" id="fileInput" hidden (change)="onFileSelected($event)" accept="image/*">
+            <ion-icon name="cloud-upload-outline" class="upload-icon" (click)="openFileInput()"></ion-icon>
+          </ion-item>
 
-        <ion-item class="campoRe">
-          <!-- El ion-input mostrará el nombre del archivo cargado -->
-          <ion-input
-            class="anton"
-            style="--color: #7C7C7C;"
-            label="Foto"
-            type="text"
-            [value]="fileName"
-            disabled>
-          </ion-input>
-          <!-- Input de archivo oculto -->
-          <input type="file" id="fileInput" hidden (change)="onFileSelected($event)">
-          <!-- Icono para abrir el selector de archivos -->
-          <ion-icon name="cloud-upload-outline" class="upload-icon" (click)="openFileInput()"></ion-icon>
-        </ion-item>
+          <div class="button-container">
+            <ion-button type="submit" class="custom-button" [disabled]="!registerForm.valid">
+              REGISTRARSE
+            </ion-button>
+          </div>
 
-        <ion-row class="links-container">
-          <ion-col style="text-align: right;">
-            <a style="color: #FDFFC7;" routerLink="/registro">Ya tienes una cuenta? Iniciar Sesion</a>
-          </ion-col>
-        </ion-row>
-      </ion-list>
+          <ion-row class="links-container">
+            <ion-col style="text-align: right;">
+              <a style="color: #FDFFC7;" routerLink="/login">¿Ya tienes una cuenta? Iniciar Sesion</a>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </form>
     </ion-card-content>
-
-    <ion-card-content>
-      <div class="intersect-elipse">
-        <button class="custom-button">Registrarse</button>
-      </div>
-    </ion-card-content>
-
   </ion-card>
 </ion-content>

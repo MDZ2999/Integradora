@@ -3,13 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+interface LoginResponse {
+  message: string;
+  usuario: {
+    id: string;
+    nombre: string;
+    correo: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkLoginStatus());
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   private usuarioId: string | null = null;
   private usuarioNombreSubject = new BehaviorSubject<string>('');
+
+  private apiUrl = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient) {
     const loggedIn = localStorage.getItem('userLoggedIn') === 'true';
@@ -20,42 +31,41 @@ export class AuthService {
   }
 
   // Iniciar sesión
-  login(correo: string, contrasena: string) {
-    return this.http.post<{ message: string, usuarioId: string, nombre: string }>(`${environment.backendUrl}/api/auth/login`, { correo, contrasena });
+  login(correo: string, contrasena: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { correo, contrasena });
   }
 
-  // Obtener estado de sesión
-  get isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInSubject.asObservable();
+  // Registrar nuevo usuario
+  register(formData: FormData): Observable<{ message: string, usuarioId: string }> {
+    return this.http.post<{ message: string, usuarioId: string }>(`${this.apiUrl}/register`, formData);
   }
 
-  // Método para actualizar el estado de la sesión
-  updateSessionState(isLoggedIn: boolean, nombre: string = '') {
-    console.log('Actualizando estado de sesión:', isLoggedIn, 'Nombre:', nombre);
-    this.isLoggedInSubject.next(isLoggedIn);
+  // Actualizar estado de sesión
+  updateSessionState(loggedIn: boolean, nombre: string = '') {
+    this.isLoggedInSubject.next(loggedIn);
     this.usuarioNombreSubject.next(nombre);
-    localStorage.setItem('userLoggedIn', isLoggedIn ? 'true' : 'false');
+    localStorage.setItem('userLoggedIn', loggedIn ? 'true' : 'false');
     if (nombre) {
       localStorage.setItem('usuarioNombre', nombre);
     }
   }
 
-  // Verifica si hay una sesión guardada en `localStorage`
-  private checkLoginStatus(): boolean {
-    return localStorage.getItem('userLoggedIn') === 'true';
+  // Obtener estado de sesión
+  isLoggedIn(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
   }
 
-  // Método de logout
+  // Obtener nombre de usuario
+  getUsuarioNombre(): Observable<string> {
+    return this.usuarioNombreSubject.asObservable();
+  }
+
+  // Cerrar sesión
   logout() {
     localStorage.removeItem('userLoggedIn');
     localStorage.removeItem('usuarioId');
     localStorage.removeItem('usuarioNombre');
-    this.isLoggedInSubject.next(false);
+    this.updateSessionState(false);
+    this.usuarioId = null;
   }
-
-  // Obtener el Nombre del usuario
-  get usuarioNombre$() {
-    return this.usuarioNombreSubject.asObservable();
-  }
-
 }
