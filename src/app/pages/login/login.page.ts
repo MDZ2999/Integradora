@@ -19,8 +19,17 @@ export class LoginPage implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {}
+
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  onLoginClick(form: any) {
+    form.form.markAllAsTouched();
+    if (form.valid) {
+      this.login();
+    }
   }
 
   login() {
@@ -28,52 +37,24 @@ export class LoginPage implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Por favor, completa todos los campos',
-        backdrop: false
+        text: 'Por favor, complete todos los campos',
       });
       return;
     }
 
-    this.authService.login(this.correo.toLowerCase(), this.contrasena.toLowerCase()).subscribe({
+    this.authService.login(this.correo.toLowerCase(), this.contrasena).subscribe({
       next: (response) => {
-        // Guardar estado de sesión
         localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('usuarioId', response.usuario.id);
-        localStorage.setItem('usuarioNombre', response.usuario.nombre);
-        this.authService.updateSessionState(true, response.usuario.nombre);
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Inicio de sesión exitoso',
-          text: 'Redirigiendo...',
-          timer: 2000,
-          showConfirmButton: false,
-          backdrop: false
-        }).then(() => {
-          this.router.navigate(['/home']);
-        });
+        localStorage.setItem('userData', JSON.stringify(response));
+        this.router.navigate(['/home']);
       },
       error: (error) => {
-        let mensaje = 'Ocurrió un error inesperado';
-
-        if (error.status === 400 || error.status === 401) {
-          mensaje = 'Correo o contraseña incorrectos';
-        } else if (error.status === 500) {
-          mensaje = 'Error al iniciar sesión';
-        } else if (error.error?.message) {
-          mensaje = error.error.message;
-        }
-
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: mensaje,
-          backdrop: false
+          text: error.error.message || 'Error al iniciar sesión',
         });
       }
     });
-  }
-
-  ngOnInit() {
   }
 }

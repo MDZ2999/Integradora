@@ -134,3 +134,14 @@ ion-content {
   cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
   z-index: 2; /* Asegura que el texto esté encima de la elipse */
 }
+
+.error-message {
+  color: #ff4646;
+  font-size: 12px;
+  margin: 5px 0;
+  padding-left: 16px;
+}
+
+.error-message div {
+  margin-bottom: 5px;
+}

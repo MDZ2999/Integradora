@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IonSearchbar, IonToolbar, IonContent, IonButtons, IonMenuButton, IonButton,
-  IonIcon, IonLabel, IonItem, IonMenu, IonList, MenuController, IonSelect, IonSelectOption, IonPopover } from '@ionic/angular/standalone';
+  IonIcon, IonLabel, IonItem, IonMenu, IonList, MenuController, IonPopover } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { cubeOutline, heartOutline, logInOutline, logOutOutline, personAddOutline, personCircle, personCircleOutline, searchOutline } from 'ionicons/icons';
+import { cubeOutline, heartOutline, logInOutline, logOutOutline, personAddOutline, personCircle, 
+  personCircleOutline, searchOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonModule } from '@angular/common';

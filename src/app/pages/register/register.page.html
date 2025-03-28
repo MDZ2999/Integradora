@@ -11,27 +11,54 @@
         <ion-list style="background-color:#3CCEC8;">
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Nombre" type="text" 
-              [(ngModel)]="usuario.Nombre" name="nombre" required></ion-input>
+              [(ngModel)]="usuario.Nombre" name="nombre" required
+              #nombreInput="ngModel"></ion-input>
+            <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="error-message">
+              <div *ngIf="nombreInput.errors?.['required']">El nombre es obligatorio</div>
+            </div>
           </ion-item>
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Apellido Paterno" type="text"
-              [(ngModel)]="usuario.Apellido_paterno" name="apellidoPaterno" required></ion-input>
+              [(ngModel)]="usuario.Apellido_paterno" name="apellidoPaterno" required
+              #apellidoPaternoInput="ngModel"></ion-input>
+            <div *ngIf="apellidoPaternoInput.invalid && (apellidoPaternoInput.dirty || apellidoPaternoInput.touched)" class="error-message">
+              <div *ngIf="apellidoPaternoInput.errors?.['required']">El apellido paterno es obligatorio</div>
+            </div>
           </ion-item>
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Apellido Materno" type="text"
-              [(ngModel)]="usuario.Apellido_materno" name="apellidoMaterno" required></ion-input>
+              [(ngModel)]="usuario.Apellido_materno" name="apellidoMaterno" required
+              #apellidoMaternoInput="ngModel"></ion-input>
+            <div *ngIf="apellidoMaternoInput.invalid && (apellidoMaternoInput.dirty || apellidoMaternoInput.touched)" class="error-message">
+              <div *ngIf="apellidoMaternoInput.errors?.['required']">El apellido materno es obligatorio</div>
+            </div>
           </ion-item>
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Correo" type="email"
-              [(ngModel)]="usuario.Correo" name="correo" required></ion-input>
+              [(ngModel)]="usuario.Correo" name="correo" required 
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              #emailInput="ngModel"></ion-input>
+            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+              <div *ngIf="emailInput.errors?.['required']">El correo es obligatorio</div>
+              <div *ngIf="emailInput.errors?.['pattern']">Ingrese un correo válido (ejemplo&#64;dominio.com)</div>
+            </div>
           </ion-item>
           <ion-item class="campoRe">
-            <ion-input class="anton" style="--color: #7C7C7C;" label="Contrasena" type="password"
-              [(ngModel)]="usuario.Contrasena" name="contrasena" required></ion-input>
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Contraseña" type="password"
+              [(ngModel)]="usuario.Contrasena" name="contrasena" required minlength="8"
+              #passwordInput="ngModel"></ion-input>
+            <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+              <div *ngIf="passwordInput.errors?.['required']">La contraseña es obligatoria</div>
+              <div *ngIf="passwordInput.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</div>
+            </div>
           </ion-item>
           <ion-item class="campoRe">
-            <ion-input class="anton" style="--color: #7C7C7C;" label="Confirmar Contrasena" type="password"
-              [(ngModel)]="usuario.confirmarContrasena" name="confirmarContrasena" required></ion-input>
+            <ion-input class="anton" style="--color: #7C7C7C;" label="Confirmar Contraseña" type="password"
+              [(ngModel)]="usuario.confirmarContrasena" name="confirmarContrasena" required minlength="8"
+              #confirmPasswordInput="ngModel"></ion-input>
+            <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)" class="error-message">
+              <div *ngIf="confirmPasswordInput.errors?.['required']">Confirmar la contraseña es obligatorio</div>
+            </div>
           </ion-item>
 
           <ion-item class="campoRe">

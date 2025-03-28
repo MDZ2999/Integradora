@@ -16,11 +16,19 @@
         <ion-list style="background-color:#3CCEC8;">
           <ion-item class="campoRe">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Correo" type="email" 
-              [(ngModel)]="correo" name="correo" required></ion-input>
+              [(ngModel)]="correo" name="correo" required
+              #emailInput="ngModel"></ion-input>
+            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+              <div *ngIf="emailInput.errors?.['required']">El correo es obligatorio</div>
+            </div>
           </ion-item>
           <ion-item class="campoRes">
             <ion-input class="anton" style="--color: #7C7C7C;" label="Contraseña" type="password"
-              [(ngModel)]="contrasena" name="contrasena" required></ion-input>
+              [(ngModel)]="contrasena" name="contrasena" required
+              #passwordInput="ngModel"></ion-input>
+            <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+              <div *ngIf="passwordInput.errors?.['required']">La contraseña es obligatoria</div>
+            </div>
           </ion-item>
         </ion-list>
       </form>

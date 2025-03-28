@@ -7,14 +7,21 @@ import { Router } from '@angular/router';
 import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { ProductosService } from '../services/productos.service';
 import { Producto } from '../models/productos.model';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonCol, IonRow, IonGrid, IonButtons, IonToolbar, IonContent, IonButton, IonIcon, IonLabel,
-    IonItem, IonMenu, IonList, HomeToolbarComponent, ProductCardComponent],
+  imports: [CommonModule, IonCol, IonRow, IonGrid, IonButtons, IonToolbar, IonContent, IonButton, IonIcon, IonLabel,
+    IonItem, IonMenu, IonList, AsyncPipe, HomeToolbarComponent, ProductCardComponent],
+  standalone: true
 })
 export class HomePage implements OnInit {
+  isLoggedIn$: Observable<boolean>;
   showSubcategories = false;
   isSmallScreen = window.innerWidth < 768;
   productos: Producto[] = [];
@@ -22,9 +29,11 @@ export class HomePage implements OnInit {
   constructor(
     private menuCtrl: MenuController,
     private router: Router,
-    private productosService: ProductosService // Inyectar el servicio
+    private productosService: ProductosService, // Inyectar el servicio
+    private authService: AuthService,
   ) {
     addIcons({ reorderThreeOutline, heart });
+    this.isLoggedIn$ = this.authService.isLoggedIn();
   }
 
   @HostListener('window:resize', ['$event'])

@@ -86,6 +86,13 @@ export class RegisterPage {
     });
   }
 
+  onRegisterClick(form: any) {
+    form.form.markAllAsTouched();
+    if (form.valid) {
+      this.register();
+    }
+  }
+
   private validateForm(): boolean {
     if (!this.usuario.Nombre || !this.usuario.Apellido_paterno || !this.usuario.Apellido_materno || 
         !this.usuario.Correo || !this.usuario.Contrasena || !this.usuario.confirmarContrasena) {

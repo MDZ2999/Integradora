@@ -121,3 +121,14 @@ body {
 .form-container {
   margin-top: -110px; /* Sube todo el formulario un poco más */
 }
+
+.error-message {
+  color: #ff4646;
+  font-size: 12px;
+  margin: 5px 0;
+  padding-left: 16px;
+}
+
+.error-message div {
+  margin-bottom: 5px;
+}

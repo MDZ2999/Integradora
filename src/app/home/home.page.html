@@ -35,7 +35,7 @@
     </div>
 
     <!-- Botón Donar a la derecha -->
-    <ion-buttons slot="end">
+    <ion-buttons *ngIf="isLoggedIn$ | async" slot="end">
       <ion-button class="donate-btn" (click)="goToPublish()">
         <ion-icon name="heart"></ion-icon>
         Donar
