@@ -38,15 +38,30 @@ export class LoginPage implements OnInit {
         icon: 'error',
         title: 'Error',
         text: 'Por favor, complete todos los campos',
+        backdrop: false
       });
       return;
     }
 
     this.authService.login(this.correo.toLowerCase(), this.contrasena).subscribe({
       next: (response) => {
+        //Guardar estado de sesion
         localStorage.setItem('userLoggedIn', 'true');
         localStorage.setItem('userData', JSON.stringify(response));
-        this.router.navigate(['/home']);
+        localStorage.setItem('usuarioId', response.usuario.id);
+        localStorage.setItem('usuarioNombre', response.usuario.nombre);
+        this.authService.updateSessionState(true, response.usuario.nombre);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de sesión exitoso',
+          text: 'Redirigiendo...',
+          timer: 2000,
+          showConfirmButton: false,
+          backdrop: false
+        }).then(() => {
+          this.router.navigate(['/home']);
+        });
       },
       error: (error) => {
         Swal.fire({
