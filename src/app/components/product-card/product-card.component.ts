@@ -27,28 +27,32 @@ export class ProductCardComponent implements OnInit {
       id: this.producto._id,
       nombre: this.producto.Nom_producto,
       usuario: this.producto.id_usuarios?.Nombre,
-      imagenUsuario: this.producto.id_usuarios?.Imagen?.substring(0, 50),
-      imagenProducto: this.producto.Imagen?.substring(0, 50)
+      imagenUsuario: this.producto.id_usuarios?.Imagen?.substring(0, 30) + '...',
+      imagenProducto: this.producto.Imagen?.substring(0, 30) + '...'
     });
   }
 
   getImagenUsuario(): SafeUrl {
     const imagen = this.producto?.id_usuarios?.Imagen;
     
-    if (!imagen || !imagen.startsWith('data:image')) {
+    if (!imagen) {
+      console.log('Sin imagen de usuario, usando default');
       return '../../../assets/img/Perfil.jpeg';
     }
 
+    console.log('Usando imagen de usuario:', imagen.substring(0, 30) + '...');
     return this.sanitizer.bypassSecurityTrustUrl(imagen);
   }
 
   getImagenProducto(): SafeUrl {
     const imagen = this.producto?.Imagen;
     
-    if (!imagen || !imagen.startsWith('data:image')) {
+    if (!imagen) {
+      console.log('Sin imagen de producto, usando default');
       return '../../../assets/img/card.jpeg';
     }
-    
+
+    console.log('Usando imagen de producto:', imagen.substring(0, 30) + '...');
     return this.sanitizer.bypassSecurityTrustUrl(imagen);
   }
 }
