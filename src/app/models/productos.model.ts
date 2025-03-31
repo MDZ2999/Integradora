@@ -1,16 +1,20 @@
+export interface Usuario {
+  _id: string;
+  Nombre: string;
+  Imagen: string;
+}
+
 export interface Producto {
   _id: string;
   Nom_producto: string;
-  Cantidad?: number;
-  Municipio?: string;
-  Codigo_postal?: number;
-  Calidad?: string;
-  Categoria?: string;
-  Descripcion?: string;
-  id_usuarios: {
-    _id: string;
-    Nombre: string;
-    Imagen?: string;
-  };
-  Imagen?: string;
+  id_usuarios: Usuario;
+  Imagen: string;
+  Cantidad: number;
+  Municipio: string;
+  Codigo_postal: number;
+  Numero_telefonico: number;
+  Calidad: string;
+  Categoria: string;
+  Subcategoria: string;
+  Descripcion: string;
 }

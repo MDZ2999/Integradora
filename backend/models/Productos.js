@@ -5,8 +5,10 @@ const ProductosSchema = new mongoose.Schema({
   Cantidad: Number,
   Municipio: String,
   Codigo_postal: Number,
+  Numero_telefonico: Number,
   Calidad: String,
   Categoria: String,
+  Subcategoria: String,
   Descripcion: String,
   id_usuarios: {
     type: mongoose.Schema.Types.ObjectId,

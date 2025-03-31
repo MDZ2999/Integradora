@@ -1,13 +1,13 @@
 <ion-card class="custom-card">
   <!-- Sección del usuario -->
   <div class="user-info">
-    <img [src]="producto?.id_usuarios?.Imagen ? producto.id_usuarios.Imagen : '../../../assets/img/Perfil.jpeg'"
+    <img [src]="getImagenUsuario()"
         [alt]="producto?.id_usuarios?.Nombre || 'Usuario'"
         class="user-avatar" />
     <span class="user-name">{{ producto?.id_usuarios?.Nombre || 'Usuario' }}</span>
   </div>
   <!-- Imagen principal -->
-  <img [src]="producto?.Imagen ? producto.Imagen : '../../../assets/img/card.jpeg'"
+  <img [src]="getImagenProducto()"
       [alt]="producto?.Nom_producto || 'Producto'"
       class="card-image" />
 </ion-card>

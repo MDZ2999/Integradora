@@ -46,6 +46,17 @@
   vertical-align: middle;
 }
 
+.back-icon {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
 .small-top-right {
   width: 100px;
   height: 100px;
@@ -100,6 +111,29 @@ ion-button {
   font-family: 'Anton', sans-serif;
 }
 
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
+.animacion-entrada {
+  animation: slideInFromRight 0.5s ease-in-out;
+}
 
+/* Animación de salida */
+@keyframes slideOutToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
+.animacion-salida {
+  animation: slideOutToRight 0.5s ease-in-out forwards;
+}

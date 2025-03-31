@@ -96,3 +96,55 @@ ion-item {
 .ion-padding {
   padding: 16px;
 }
+
+/* Estilos para las alertas de Ionic */
+.success-alert {
+  --background: #3CCEC8;
+  
+  .alert-title {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+  }
+  
+  .alert-message {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+  }
+
+  .alert-button {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    --background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.error-alert {
+  --background: #ff4646;
+  
+  .alert-title {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+  }
+  
+  .alert-message {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+  }
+
+  .alert-button {
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    --background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Asegurarse de que las alertas no afecten el layout */
+ion-alert {
+  --backdrop-opacity: 0.5;
+  z-index: 999999 !important;
+  
+  .alert-wrapper {
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+}

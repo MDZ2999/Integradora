@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 
 interface LoginResponse {
   message: string;
+  token: string;
   usuario: {
     id: string;
     nombre: string;
@@ -41,31 +42,45 @@ export class AuthService {
   }
 
   // Actualizar estado de sesión
-  updateSessionState(loggedIn: boolean, nombre: string = '') {
+  updateSessionState(loggedIn: boolean, nombre: string = '', token?: string) {
     this.isLoggedInSubject.next(loggedIn);
     this.usuarioNombreSubject.next(nombre);
     localStorage.setItem('userLoggedIn', loggedIn ? 'true' : 'false');
     if (nombre) {
       localStorage.setItem('usuarioNombre', nombre);
     }
+    if (token) {
+      localStorage.setItem('token', token);
+    }
   }
 
-  // Obtener estado de sesión
-  isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInSubject.asObservable();
+  // Obtener token
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
-  // Obtener nombre de usuario
-  getUsuarioNombre(): Observable<string> {
-    return this.usuarioNombreSubject.asObservable();
+  // Verificar si está autenticado
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
   // Cerrar sesión
   logout() {
     localStorage.removeItem('userLoggedIn');
+    localStorage.removeItem('userData');
     localStorage.removeItem('usuarioId');
     localStorage.removeItem('usuarioNombre');
-    this.updateSessionState(false);
-    this.usuarioId = null;
+    localStorage.removeItem('token');
+    this.isLoggedInSubject.next(false);
+    this.usuarioNombreSubject.next('');
+  }
+
+  // Getters para observables
+  isLoggedIn(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
+  getUsuarioNombre(): Observable<string> {
+    return this.usuarioNombreSubject.asObservable();
   }
 }

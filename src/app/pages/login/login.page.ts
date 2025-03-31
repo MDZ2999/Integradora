@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,11 @@ export class LoginPage implements OnInit {
   correo: string = '';
   contrasena: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {}
 
@@ -32,44 +36,41 @@ export class LoginPage implements OnInit {
     }
   }
 
-  login() {
+  async presentAlert(header: string, message: string, isSuccess: boolean = false) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+      cssClass: isSuccess ? 'success-alert' : 'error-alert'
+    });
+    await alert.present();
+  }
+
+  async login() {
     if (!this.correo || !this.contrasena) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Por favor, complete todos los campos',
-        backdrop: false
-      });
+      await this.presentAlert('Error', 'Por favor, complete todos los campos');
       return;
     }
 
-    this.authService.login(this.correo.toLowerCase(), this.contrasena).subscribe({
-      next: (response) => {
+    try {
+      const response = await this.authService.login(this.correo.toLowerCase(), this.contrasena).toPromise();
+      
+      if (response) {
         //Guardar estado de sesion
         localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('userData', JSON.stringify(response));
+        localStorage.setItem('userData', JSON.stringify(response.usuario));
         localStorage.setItem('usuarioId', response.usuario.id);
         localStorage.setItem('usuarioNombre', response.usuario.nombre);
-        this.authService.updateSessionState(true, response.usuario.nombre);
+        this.authService.updateSessionState(true, response.usuario.nombre, response.token);
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Inicio de sesión exitoso',
-          text: 'Redirigiendo...',
-          timer: 2000,
-          showConfirmButton: false,
-          backdrop: false
-        }).then(() => {
-          this.router.navigate(['/home']);
-        });
-      },
-      error: (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.error.message || 'Error al iniciar sesión',
-        });
+        await this.presentAlert('¡Éxito!', 'Inicio de sesión exitoso', true);
+        this.router.navigate(['/home']);
       }
-    });
+    } catch (error: any) {
+      await this.presentAlert(
+        'Error', 
+        error.error?.message || 'Error al iniciar sesión'
+      );
+    }
   }
 }
