@@ -23,17 +23,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/publish/publish.page').then( m => m.PublishPage)
   },
   {
-    path: 'publish-detail',
-    loadComponent: () => import('./pages/publish-detail/publish-detail.page').then( m => m.PublishDetailPage)
-  },
-  {
     path: 'baul',
     loadComponent: () => import('./pages/baul/baul.page').then( m => m.BaulPage)
   },
   {
     path: 'donaciones',
     loadComponent: () => import('./pages/donaciones/donaciones.page').then( m => m.DonacionesPage)
-  },  {
+  },
+  {
     path: 'perfil',
     loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
   },
