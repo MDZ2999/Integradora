@@ -75,6 +75,17 @@ export class AuthService {
     this.usuarioNombreSubject.next('');
   }
 
+  // Obtener ID del usuario actual
+  getUsuarioId(): string | null {
+    return localStorage.getItem('usuarioId');
+  }
+
+  // Establecer ID del usuario
+  setUsuarioId(id: string) {
+    this.usuarioId = id;
+    localStorage.setItem('usuarioId', id);
+  }
+
   // Getters para observables
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
