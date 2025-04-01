@@ -26,7 +26,6 @@ export class PublishPage implements OnInit {
     Numero_telefonico: null,
     Calidad: '',
     Categoria: '',
-    Subcategoria: '',
     Descripcion: '',
     Imagen: {
       nombre: '',
@@ -83,7 +82,6 @@ export class PublishPage implements OnInit {
       this.producto.Numero_telefonico &&
       this.producto.Calidad &&
       this.producto.Categoria &&
-      this.producto.Subcategoria &&
       this.producto.Descripcion &&
       this.producto.Imagen.contenido
     );

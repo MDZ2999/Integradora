@@ -8,7 +8,6 @@ const ProductosSchema = new mongoose.Schema({
   Numero_telefonico: Number,
   Calidad: String,
   Categoria: String,
-  Subcategoria: String,
   Descripcion: String,
   id_usuarios: {
     type: mongoose.Schema.Types.ObjectId,
@@ -16,7 +15,7 @@ const ProductosSchema = new mongoose.Schema({
     required: true
   },
   Imagen: {
-    type: Buffer, // Esto se utiliza para almacenar datos binarios
+    type: Buffer,
     required: false
   },
 });

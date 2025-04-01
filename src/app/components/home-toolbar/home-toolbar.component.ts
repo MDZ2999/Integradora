@@ -65,14 +65,17 @@ export class HomeToolbarComponent implements OnInit {
     this.isPopoverOpen = true;
   }
 
-  // Redirigir a la página de perfil
-  goToProfile() {
+  // Redirigir a la página de perfil y cerrar menús
+  async goToProfile() {
     this.isPopoverOpen = false;
+    await this.menuCtrl.close('home-toolbar-menu');
     this.router.navigate(['/perfil']);
   }
+
   // Cerrar sesión
-  logout() {
+  async logout() {
     this.isPopoverOpen = false;
+    await this.menuCtrl.close('home-toolbar-menu');
     this.authService.logout();
     this.router.navigate(['/home']);
   }

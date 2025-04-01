@@ -63,6 +63,16 @@ export class ProductosService {
     );
   }
 
+  getProductosByUserId(userId: string): Observable<Producto[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Producto[]>(`${this.apiUrl}/user/${userId}`, { headers }).pipe(
+      map(productos => {
+        console.log('Productos del usuario recibidos:', productos);
+        return productos;
+      })
+    );
+  }
+
   crearProducto(productoData: any): Observable<any> {
     const headers = this.getHeaders();
     console.log('Token:', headers.get('Authorization'));

@@ -79,6 +79,34 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+// Ruta para obtener productos por usuario
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const productos = await Producto.find({ id_usuarios: req.params.userId }).populate('id_usuarios');
+    
+    const productosConImagenes = productos.map(producto => {
+      const productoObj = producto.toObject();
+
+      // Convertir imagen del producto
+      if (productoObj.Imagen) {
+        productoObj.Imagen = convertirImagenABase64(productoObj.Imagen);
+      }
+
+      // Convertir imagen del usuario
+      if (productoObj.id_usuarios?.Imagen) {
+        productoObj.id_usuarios.Imagen = convertirImagenABase64(productoObj.id_usuarios.Imagen);
+      }
+
+      return productoObj;
+    });
+
+    res.json(productosConImagenes);
+  } catch (error) {
+    console.error('Error al obtener productos del usuario:', error);
+    res.status(500).json({ message: 'Error al obtener productos del usuario', error: error.message });
+  }
+});
+
 // Función para convertir imagen de MongoDB a base64
 function convertirImagenABase64(imagen) {
   try {

@@ -41,21 +41,18 @@
       <ion-item class="campoRe">
         <ion-label class="anton" style="color:#7C7C7C;">Categoria:</ion-label>
         <ion-select [(ngModel)]="producto.Categoria" style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
-          <ion-select-option class="anton_option" value="ropa">Ropa</ion-select-option>
+          <ion-select-option class="anton_option" value="papeleria">Papeleria</ion-select-option>
           <ion-select-option class="anton_option" value="electronica">Electrónica</ion-select-option>
-          <ion-select-option class="anton_option" value="hogar">Hogar</ion-select-option>
-          <ion-select-option class="anton_option" value="juguetes">Juguetes</ion-select-option>
-          <ion-select-option class="anton_option" value="libros">Libros</ion-select-option>
+          <ion-select-option class="anton_option" value="otros">Otros</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="campoRe">
-        <ion-label class="anton" style="color:#7C7C7C;">Subcategoria:</ion-label>
-        <ion-select [(ngModel)]="producto.Subcategoria" style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
-          <ion-select-option class="anton_option" value="hombre">Hombre</ion-select-option>
-          <ion-select-option class="anton_option" value="mujer">Mujer</ion-select-option>
-          <ion-select-option class="anton_option" value="niños">Niños</ion-select-option>
-          <ion-select-option class="anton_option" value="accesorios">Accesorios</ion-select-option>
+        <ion-label class="anton" style="color:#7C7C7C;">Calidad:</ion-label>
+        <ion-select [(ngModel)]="producto.Calidad" style="color: black;" interface="popover" slot="end">
+          <ion-select-option value="nuevo">Nuevo</ion-select-option>
+          <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
+          <ion-select-option value="usado">Usado</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -69,15 +66,6 @@
 
       <ion-item class="campoRe" lines="none">
         <ion-input class="anton" [(ngModel)]="producto.Numero_telefonico" type="tel" label="Numero Telefonico:" style="color:#7C7C7C; width: 100%;"></ion-input>
-    </ion-item>
-
-    <ion-item class="campoRe">
-      <ion-label class="anton" style="color:#7C7C7C;">Calidad:</ion-label>
-      <ion-select [(ngModel)]="producto.Calidad" style="color: black;" interface="popover" slot="end">
-        <ion-select-option value="nuevo">Nuevo</ion-select-option>
-        <ion-select-option value="seminuevo">Seminuevo</ion-select-option>
-        <ion-select-option value="usado">Usado</ion-select-option>
-      </ion-select>
     </ion-item>
 
     <ion-item class="campoRe" lines="none">

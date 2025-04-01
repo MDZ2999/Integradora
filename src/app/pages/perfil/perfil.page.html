@@ -3,10 +3,10 @@
     <!-- Sección de perfil -->
     <div class="profile-header">
       <ion-avatar class="profile-avatar">
-        <img src="https://imgs.search.brave.com/A0IzOYLA1Di3qqM04hCA4WYBG3EorfM3y_Y9CtkbCEk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50Lm5hdGlvbmFs/Z2VvZ3JhcGhpYy5j/b20uZXMvbWVkaW8v/MjAyMi8xMi8xMi9w/ZXJyby0xXzUxNGFh/ZDNiXzIyMTIxMjE2/MTAyM18xMjgweDcy/MC5qcGc" alt="Foto">
+        <img [src]="getImagenUsuario()" alt="Foto de perfil">
       </ion-avatar>
       <div class="profile-info">
-        <h1 class="anton_nombre">Alexis Edmundo</h1>
+        <h1 class="anton_nombre">{{ userName }}</h1>
         <div class="rating-container">
           <ion-button class="anton" fill="outline"  >
             EDITAR PERFIL
@@ -27,67 +27,14 @@
     <div class="donations-section">
       <h2 class="anton">Donaciones:</h2>
       <swiper-container init="true">
-        <swiper-slide>
+        <swiper-slide *ngFor="let producto of userProducts">
           <ion-card>
-            <img src="https://imgs.search.brave.com/FmZihkOS8HccSkXk3iRoRIbw1D4kzeIXgAxK-t5J4M8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kZWZp/bmljaW9uLmRlL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDEzLzAz/L3BlcnJvLWJlYWds/ZS5qcGc" 
-                 alt="Donación 1"
+            <img [src]="getImagenProducto(producto)" 
+                 [alt]="producto.Nom_producto"
                  loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/A0IzOYLA1Di3qqM04hCA4WYBG3EorfM3y_Y9CtkbCEk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50Lm5hdGlvbmFs/Z2VvZ3JhcGhpYy5j/b20uZXMvbWVkaW8v/MjAyMi8xMi8xMi9w/ZXJyby0xXzUxNGFh/ZDNiXzIyMTIxMjE2/MTAyM18xMjgweDcy/MC5qcGc" 
-                 alt="Donación 2"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 3"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card>
-            <img src="https://imgs.search.brave.com/J9r0maj0d7dVb6b6G4RFyqyQGFBQS2VoRYRb3yp_-uY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jYXJs/c2pyLmVzL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzA1L0Jh/Y29uLUNoZWVzZS1H/cmlsbGVkLUNoaWNr/ZW4ucG5n" 
-                 alt="Donación 4"
-                 loading="lazy">
+            <ion-card-content>
+              <h3>{{ producto.Nom_producto }}</h3>
+            </ion-card-content>
           </ion-card>
         </swiper-slide>
       </swiper-container>

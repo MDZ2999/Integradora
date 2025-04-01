@@ -15,6 +15,5 @@ export interface Producto {
   Numero_telefonico: number;
   Calidad: string;
   Categoria: string;
-  Subcategoria: string;
   Descripcion: string;
 }

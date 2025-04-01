@@ -49,11 +49,11 @@
         <ion-icon name="cube-outline" class="profile-icon"></ion-icon>
         <ion-label>MI BAÚL</ion-label>
       </ion-item>
-      <ion-item button *ngIf="isLoggedIn$ | async">
+      <ion-item (click)="goToProfile()" button *ngIf="isLoggedIn$ | async">
         <ion-icon name="person-circle" class="profile-icon"></ion-icon>
         <ion-label>PERFIL</ion-label>
       </ion-item>
-      <ion-item button (click)="logout()" *ngIf="isLoggedIn$ | async">
+      <ion-item (click)="logout()" button *ngIf="isLoggedIn$ | async">
         <ion-icon name="log-out-outline" class="profile-icon"></ion-icon>
         <ion-label>CERRAR SESIÓN</ion-label>
       </ion-item>

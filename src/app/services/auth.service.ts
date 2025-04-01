@@ -94,4 +94,13 @@ export class AuthService {
   getUsuarioNombre(): Observable<string> {
     return this.usuarioNombreSubject.asObservable();
   }
+
+  getUsuarioIdPromise(): Promise<string | null> {
+    return Promise.resolve(this.usuarioId);
+  }
+
+  getUsuarioImagen(): Observable<string> {
+    // Por ahora retornamos una imagen por defecto
+    return new BehaviorSubject<string>('../../../assets/img/Perfil.jpeg').asObservable();
+  }
 }
