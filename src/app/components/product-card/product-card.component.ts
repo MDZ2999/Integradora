@@ -36,11 +36,9 @@ export class ProductCardComponent implements OnInit {
     const imagen = this.producto?.id_usuarios?.Imagen;
     
     if (!imagen) {
-      console.log('Sin imagen de usuario, usando default');
       return '../../../assets/img/Perfil.jpeg';
     }
 
-    console.log('Usando imagen de usuario:', imagen.substring(0, 30) + '...');
     return this.sanitizer.bypassSecurityTrustUrl(imagen);
   }
 
@@ -48,11 +46,9 @@ export class ProductCardComponent implements OnInit {
     const imagen = this.producto?.Imagen;
     
     if (!imagen) {
-      console.log('Sin imagen de producto, usando default');
       return '../../../assets/img/card.jpeg';
     }
 
-    console.log('Usando imagen de producto:', imagen.substring(0, 30) + '...');
     return this.sanitizer.bypassSecurityTrustUrl(imagen);
   }
 }

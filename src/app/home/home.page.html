@@ -12,7 +12,7 @@
           <ion-icon name="reorder-three-outline"></ion-icon>
           <span>Categorías</span>
         </ion-menu-button>
-        <ion-button *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
+        <ion-button slot="end" *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
           <ion-icon name="heart"></ion-icon>
           <span>Donar</span>
         </ion-button>
@@ -55,7 +55,7 @@
         </ion-button>
 
         <!-- Botón Donar para pantallas grandes -->
-        <ion-button *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
+        <ion-button slot="end" *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
           <ion-icon name="heart"></ion-icon>
           <span>Donar</span>
         </ion-button>
