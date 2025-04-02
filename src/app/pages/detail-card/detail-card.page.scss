@@ -1,0 +1,346 @@
+:host {
+  display: block;
+  height: 100vh;
+  --ion-padding: 0;
+}
+
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #7C7C7C;
+  padding: 20px;
+}
+
+.product-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+    ion-label {
+      font-family: 'Anton', sans-serif;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+
+    ion-chip {
+      font-family: 'Anton', sans-serif;
+      background: #00bc6b;
+      margin: 0;
+      --background: var(--ion-color-tertiary-light);
+      --color: var(--ion-color-tertiary);
+    }
+
+    @media (max-width: 480px) {
+      padding: 0 8px;
+      
+      ion-chip {
+        font-size: 0.9rem;
+        height: 28px;
+      }
+    }
+  }
+}
+
+.product-title {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 2rem;
+  color: #F7B495;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.status-chip {
+  margin-top: 10px;
+
+  ion-chip {
+    --background: #00bc6b;
+    font-family: 'Anton', sans-serif;
+  }
+  ion-label {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+}
+
+.unified-content {
+  display: flex;
+  gap: 0;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .image-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--dominant-color, #00C2BA) 0%, var(--secondary-color, #F7B495) 100%);
+    overflow: hidden;
+    transition: background 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex: 1;
+    min-height: 300px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 0;
+    }
+
+    .product-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      min-height: 200px;
+    }
+
+    @media (max-width: 480px) {
+      min-height: 150px;
+      padding: 12px;
+    }
+  }
+
+  .info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: transparent;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+
+    @media (max-width: 768px) {
+      border-left: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 480px) {
+      padding: 12px;
+    }
+
+    .details-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-top: -20px;
+      
+      ion-item {
+        --background: transparent;
+        --border-color: rgba(0, 0, 0, 0.1);
+        margin-bottom: 16px;
+        border-radius: 10px;
+
+        h2 {
+          font-family: 'Anton', sans-serif;
+          color: #7C7C7C;
+          font-size: 1.2rem;
+          margin-bottom: 4px;
+        }
+
+        p {
+          font-family: 'Anton', sans-serif;
+          color: #F7B495;
+          font-size: 1rem;
+          margin: 0;
+          letter-spacing: 0.5px;
+        }
+
+        ion-label {
+          --color: inherit;
+          font-family: 'Anton', sans-serif;
+        }
+        .rating {
+          display: flex;
+          align-items: center;
+          margin-top: 0.5rem;
+          gap: 8px;
+        }  
+
+        @media (max-width: 480px) {
+          margin-bottom: 8px;
+          
+          h2 {
+            font-size: 1rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: auto;
+        padding-top: 25px;
+    
+        ion-button {
+          height: auto;
+          --border-radius: 12px;
+          --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          min-width: fit-content;
+          padding: 0 24px;
+          
+          &.save-button {
+            font-family: 'Anton', sans-serif;
+            font-size: 18px;
+            --background: #B70135;
+            --background-activated: #8f0129;
+            --background-hover: #a0012f;
+            --color: white;
+            --border-width: 1px;
+            --border-style: solid;
+            --border-color: #B70135;
+            flex: 1;
+            
+            &:hover {
+              --border-color: #8f0129;
+            }
+          }
+        
+          &.obtain-button {
+            font-family: 'Anton', sans-serif;
+            font-size: 18px;
+            --background: #00bc6b;
+            --background-activated: #009d59;
+            --background-hover: #00ad62;
+            --color: white;
+            --border-width: 2px;
+            --border-style: solid;
+            --border-color: #00bc6b;
+            flex: 1;
+            
+            &:hover {
+              --border-color: #009d59;
+            }
+          }
+
+          @media (max-width: 480px) {
+            margin: 0;
+            font-size: 16px !important;
+            --padding-top: 8px;
+            --padding-bottom: 8px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+    }
+  }
+}
+
+.donor-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --background: transparent;
+  margin: 16px 0;
+
+  ion-avatar {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #F7B495;
+  }
+
+  .donor-name {
+    font-family: 'Anton', sans-serif;
+    color: #7C7C7C;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    margin: 8px 0;
+
+    ion-avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .donor-name {
+      font-size: 1rem;
+    }
+
+    .rating {
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container {
+    padding: 8px;
+  }
+
+  .product-header {
+    padding: 12px;
+
+    .product-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  .unified-content {
+    padding: 8px;
+    gap: 12px;
+  }
+}

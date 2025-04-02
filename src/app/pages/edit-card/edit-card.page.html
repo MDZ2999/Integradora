@@ -1,0 +1,134 @@
+<ion-content [fullscreen]="true">
+  <div class="product-container">
+    <div class="main-content">
+      <div
+        class="image-section"
+        [style.--dominant-color]="dominantColor"
+        [style.--secondary-color]="secondaryColor"
+      >
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          style="display: none"
+        />
+        <ion-button
+          fill="clear"
+          class="nav-button left"
+          (click)="previousImage()"
+        >
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <img [src]="currentImage" alt="Product Image" class="product-image" />
+        <ion-button fill="clear" class="nav-button right" (click)="nextImage()">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          fill="clear"
+          class="change-image-button"
+          (click)="fileInput.click()"
+        >
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="info-section">
+        <div class="product-header">
+          <ion-item color="transparent">
+            <ion-input
+              type="text"
+              placeholder="Nombre del producto"
+              [(ngModel)]="productTitle"
+              class="product-title"
+            ></ion-input>
+          </ion-item>
+          <div class="status-chip">
+            <ion-chip>
+              <ion-label>Estado: Disponible</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+        <div class="categories">
+          <ion-item>
+            <ion-label>Estado:</ion-label>
+            <ion-select [(ngModel)]="status" interface="popover">
+              <ion-select-option
+                *ngFor="let option of statusOptions"
+                [value]="option.toLowerCase()"
+              >
+                {{option}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Categoría:</ion-label>
+            <ion-select
+              [(ngModel)]="category"
+              (ionChange)="onCategoryChange($event)"
+              interface="popover"
+            >
+              <ion-select-option
+                *ngFor="let option of categoryOptions"
+                [value]="option"
+              >
+                {{option}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Calidad:</ion-label>
+            <ion-select [(ngModel)]="quality" interface="popover">
+              <ion-select-option
+                *ngFor="let option of qualityOptions"
+                [value]="option"
+              >
+                {{option}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          
+        </div>
+
+        <form class="details-form">
+          <ion-item>
+            <ion-label position="fixed">Municipio:</ion-label>
+            <ion-input type="text" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="fixed">Cantidad:</ion-label>
+            <ion-input type="number" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="fixed">Código Postal:</ion-label>
+            <ion-input type="text" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="fixed">Descripción:</ion-label>
+            <ion-textarea
+              auto-grow="true"
+              [rows]="1"
+              placeholder="Escribe tu descripción aquí..."
+              required
+            ></ion-textarea>
+          </ion-item>
+
+          <div class="button-container">
+            <ion-button class="save-button" expand="block">
+              Cancelar
+            </ion-button>
+            <ion-button class="obtain-button" expand="block">
+              Actualizar
+            </ion-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

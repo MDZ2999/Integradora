@@ -37,6 +37,14 @@ export const routes: Routes = [
   {
     path: 'configure-perfil',
     loadComponent: () => import('./pages/configure-perfil/configure-perfil.page').then( m => m.ConfigurePerfilPage)
+  },  {
+    path: 'detail-card',
+    loadComponent: () => import('./pages/detail-card/detail-card.page').then( m => m.DetailCardPage)
   },
+  {
+    path: 'edit-card',
+    loadComponent: () => import('./pages/edit-card/edit-card.page').then( m => m.EditCardPage)
+  },
+
 
 ];

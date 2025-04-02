@@ -1,0 +1,386 @@
+:host {
+  display: block;
+  --ion-padding: 16px;
+  height: 100%;
+}
+
+ion-content {
+  --background: #00C2BA;
+  height: 100%;
+}
+
+.product-container {
+  padding: 16px;
+  background-color: #00C2BA;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: transparent;
+
+  .product-title {
+    font-family: 'Fredoka One', sans-serif;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #F7B495;
+    flex: 1;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .status-chip ion-chip {
+    margin: 0;
+    background: #00bc6b;
+    font-weight: 500;
+  }
+
+  ion-label {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+}
+
+.main-content {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  flex: 1;
+  height: 100%;
+
+  .image-section, .info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 100%;
+  }
+
+  .image-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--dominant-color, #00C2BA) 0%, var(--secondary-color, #F7B495) 100%);
+    overflow: hidden;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 20px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: var(--current-image);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      filter: blur(8px);
+      transform: scale(1.1);
+      z-index: 0;
+    }
+
+    .product-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+      mix-blend-mode: normal;
+      display: block;
+      margin: auto;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      z-index: 2;
+      --color: rgba(255, 255, 255, 0.8);
+      --background: rgba(0, 0, 0, 0.3);
+      --border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      
+      &.left {
+        left: 8px;
+      }
+      
+      &.right {
+        right: 8px;
+      }
+
+      ion-icon {
+        font-size: 24px;
+      }
+
+      &:hover {
+        --color: white;
+        --background: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .change-image-button {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 2;
+      --color: rgba(255, 255, 255, 0.8);
+      --background: rgba(0, 0, 0, 0.3);
+      --border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ion-icon {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      &:hover {
+        --color: white;
+        --background: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  .info-section {
+    .categories {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: transparent;
+      
+      ion-item {
+        --background: #f8f9fa;
+        --border-color: #e9ecef;
+        --border-radius: 8px;
+        --border-width: 1px;
+        --border-style: solid;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:hover {
+          --background: #ffffff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          transform: translateY(-1px);
+        }
+
+        ion-label {
+          font-family: 'Anton', sans-serif;
+          color: #7C7C7C;
+          font-weight: 500;
+          font-size: 0.95rem;
+          letter-spacing: 0.3px;
+          padding: 8px 0;
+        }
+
+        ion-select {
+          font-family: 'Anton', sans-serif;
+          color: #7C7C7C;
+          --placeholder-color: #7C7C7C;
+          --placeholder-opacity: 1;
+          padding: 8px 12px;
+          border-radius: 6px;
+          
+          &::part(text) {
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+          }
+
+          &::part(icon) {
+            color: #00C2BA;
+            opacity: 0.8;
+          }
+        }
+
+        &.item-has-focus {
+          --background: #ffffff;
+          --border-color: #00C2BA;
+          box-shadow: 0 0 0 2px rgba(0, 194, 186, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Estilos para el formulario
+.details-form {
+  ion-item {
+    --padding-start: 0;
+    --background: transparent;
+    margin-bottom: 16px;
+    --border-color: var(--ion-color-medium-shade);
+    --highlight-height: 2px;
+
+    &:last-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  ion-label {
+    font-family: 'Anton', sans-serif;
+    font-weight: 500;
+    color: #7C7C7C;
+  }
+
+  ion-input, ion-textarea {
+    font-family: 'Anton', sans-serif;
+    color: #7C7C7C;
+    --padding-start: 0;
+    --background: transparent;
+    font-size: 16px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 25px;
+
+    ion-button {
+      height: auto;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      min-width: fit-content;
+      padding: 0 24px;
+      
+      &.save-button {
+        font-family: 'Anton', sans-serif;
+        font-size: 18px;
+        --background: #B70135;
+        --background-activated: #8f0129;
+        --background-hover: #a0012f;
+        --color: white;
+        --border-width: 1px;
+        --border-style: solid;
+        --border-color: #B70135;
+        flex: 1;
+        
+        &:hover {
+          --border-color: #8f0129;
+        }
+      }
+    
+      &.obtain-button {
+        font-family: 'Anton', sans-serif;
+        font-size: 18px;
+        --background: #00bc6b;
+        --background-activated: #009d59;
+        --background-hover: #00ad62;
+        --color: white;
+        --border-width: 2px;
+        --border-style: solid;
+        --border-color: #00bc6b;
+        flex: 1;
+        
+        &:hover {
+          --border-color: #009d59;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .button-container {
+      flex-direction: column;
+      gap: auto;
+    }
+
+    .button-container ion-button {
+      padding: 0 16px;
+    }
+  }
+}
+
+// Media queries para responsive
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-header {
+    flex-wrap: wrap;
+    padding: 8px;
+    
+    ion-item {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+    }
+
+    .status-chip {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .image-section {
+    min-height: 300px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container {
+    padding: 8px;
+  }
+
+  .main-content {
+    gap: 8px;
+  }
+
+  .image-section, .info-section {
+    padding: 8px;
+  }
+
+  .product-title {
+    font-size: 1.2rem !important;
+  }
+
+  ion-chip {
+    font-size: 14px;
+  }
+}

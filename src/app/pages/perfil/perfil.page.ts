@@ -1,7 +1,7 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonContent,  
-         IonAvatar, IonButton, IonIcon, IonCard, IonCardContent,
-         IonList, IonItem, IonLabel, IonText } from '@ionic/angular/standalone';
+        IonAvatar, IonButton, IonIcon, IonCard, IonCardContent,
+        IonList, IonItem, IonLabel, IonText } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
