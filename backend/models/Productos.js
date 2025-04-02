@@ -9,6 +9,12 @@ const ProductosSchema = new mongoose.Schema({
   Calidad: String,
   Categoria: String,
   Descripcion: String,
+  Estado: {
+    type: String,
+    required: true,
+    enum: ['Disponible', 'No disponible'],
+    default: 'Disponible'
+  },
   id_usuarios: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario',

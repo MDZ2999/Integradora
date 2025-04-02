@@ -1,46 +1,119 @@
 ion-content {
-  --background:white !important;
+  --background: white !important;
 }
 
-.categories-container {
+/* Estilos generales */
+.category-section {
+  padding: 10px;
+  background: white;
+  overflow-x: hidden;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+
+.buttons-container-large {
   display: flex;
   align-items: center;
-  position: relative;
+  gap: 10px;
+  padding: 0;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-/* Botón principal */
-.category-btn {
+.small-screen-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* Estilos compartidos para botón de categorías y menu button */
+.category-btn, .menu-button-custom {
   --background: #BFFFD4;
   color: black;
   font-family: 'Fredoka One', sans-serif;
-  font-weight: 400px;
   font-size: 13px;
-  line-height: 100%;
-  letter-spacing: -3%;
-  text-align: center;
-  vertical-align: middle;
-  width: 137px;
-  height: 29px;
-  border-radius: 8px;
+  width: 120px;
+  height: 36px;
+  border-radius: 8px !important;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  z-index: 2;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 18px;
+    min-width: 18px;
+  }
+}
+
+/* Estilo específico para el ion-menu-button */
+.menu-button-custom {
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-radius: 8px;
+  --background: #BFFFD4 !important;
+  color: black !important;
+  margin: 0;
+  
+  ion-icon {
+    font-size: 18px;
+    min-width: 18px;
+    margin-right: 5px;
+  }
+  
+  &::part(native) {
+    height: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Botón donar */
+.donate-btn {
+  --background: #FFABAB;
+  --color: #750C0C;
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 13px;
+  width: 120px;
+  height: 36px;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 18px;
+    min-width: 18px;
+    color: #900B09;
+  }
 }
 
 /* Contenedor de los sub-botones */
 .subcategories {
   display: flex;
-  gap: 8px;
+  align-items: center;
   position: absolute;
-  left: 0;
-  z-index: 1;
-  top: 0; /* Asegura que estén alineados verticalmente con Categorías */
-  height: 100%; /* Asegurar alineación */
+  left: 2px; /* Solo 2px de separación del botón principal */
+  top: 0;
+  height: 100%;
 }
 
-/* Botones de subcategorías */
 .subcategory-btn {
   --background: #BFFFD4;
   color: black;
@@ -52,71 +125,90 @@ ion-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateX(0);
+  gap: 8px;
+  margin: 0;
   opacity: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  visibility: hidden;
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 18px;
+    min-width: 18px;
+  }
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  &.selected {
+    --background: #32CD32;
+    color: white;
+  }
 }
 
-/* Mostrar los botones con animación */
-.show:nth-child(1) {
-  transform: translateX(145px);
-  opacity: 1;
-  transition-delay: 0.1s;
+/* Utilidades de visibilidad */
+.show-on-sm {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
 }
 
-.show:nth-child(2) {
-  transform: translateX(290px);
-  opacity: 1;
-  transition-delay: 0.2s;
+.hide-on-sm {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
 }
 
-.show:nth-child(3) {
-  transform: translateX(435px);
-  opacity: 1;
-  transition-delay: 0.3s;
+.hide-on-md {
+  @media (min-width: 768px) and (max-width: 991px) {
+    display: none !important;
+  }
 }
 
-/* Ocultar los botones con animación */
-.subcategory-btn:not(.show) {
-  transform: translateX(0);
-  opacity: 0;
+.hide-on-lg {
+  @media (min-width: 992px) {
+    display: none !important;
+  }
 }
 
-/* Ocultar en pantallas pequeñas */
-@media (max-width: 767px) {
-  .subcategories{
-    display: none;
+/* Estilos para el menú lateral */
+ion-menu {
+  --background: #000000;
+
+  ion-content {
+    --background: #000000;
+  }
+
+  ion-list {
+    background: #000000;
+    padding: 0;
+  }
+
+  ion-item {
+    --background: #000000;
+    --color: white;
+    margin: 5px 0;
+    border-radius: 8px;
+
+    ion-icon {
+      font-size: 18px;
+      min-width: 18px;
+      margin-right: 10px;
+    }
+
+    &.selected {
+      --background: #BFFFD4;
+    }
   }
 }
 
 .custom-toolbar {
   --background: white;
   padding: 5px 10px;
-}
-
-.donate-btn {
-  width: 137px;
-  height: 29px;
-  background-color: #FFABAB;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px; /* Espacio entre icono y texto */
-  font-family: "Fredoka One", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: -0.03em;
-  color: #750C0C;
-}
-
-.donate-btn ion-icon {
-  color: #750C0C;
-  font-size: 18px;
 }
 
 .custom-card {
@@ -161,5 +253,12 @@ ion-content {
 @media (max-width: 767px) {
   .card-image {
     max-width: 100%; /* Se ajusta a 2 columnas */
+  }
+}
+
+/* Ocultar en pantallas pequeñas */
+@media (max-width: 767px) {
+  .subcategories {
+    display: none;
   }
 }

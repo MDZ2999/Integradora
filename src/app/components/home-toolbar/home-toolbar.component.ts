@@ -1,82 +1,139 @@
-import { Component, OnInit } from '@angular/core';
-import { IonSearchbar, IonToolbar, IonContent, IonButtons, IonMenuButton, IonButton,
-  IonIcon, IonLabel, IonItem, IonMenu, IonList, MenuController, IonPopover } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { cubeOutline, heartOutline, logInOutline, logOutOutline, personAddOutline, personCircle, 
-  personCircleOutline, searchOutline } from 'ionicons/icons';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { 
+  IonToolbar, 
+  IonTitle, 
+  IonButtons, 
+  IonButton, 
+  IonIcon, 
+  IonSearchbar, 
+  IonMenuButton, 
+  IonLabel, 
+  IonContent, 
+  IonItem, 
+  IonList, 
+  IonMenu, 
+  MenuController,
+  PopoverController
+} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { SearchService } from 'src/app/services/search.service';
+import { addIcons } from 'ionicons';
+import { 
+  cubeOutline, 
+  heartOutline, 
+  logInOutline, 
+  logOutOutline, 
+  personAddOutline, 
+  personCircle, 
+  personCircleOutline, 
+  searchOutline 
+} from 'ionicons/icons';
+import { ProfilePopoverComponent } from '../profile-popover/profile-popover.component';
 
 @Component({
   selector: 'app-home-toolbar',
   templateUrl: './home-toolbar.component.html',
   styleUrls: ['./home-toolbar.component.scss'],
   standalone: true,
-  imports: [IonPopover, IonToolbar, IonContent, IonButtons, IonMenuButton, IonButton, IonIcon, IonLabel,
-    IonSearchbar, IonItem, IonMenu, IonList, CommonModule],
+  imports: [
+    CommonModule, 
+    IonToolbar, 
+    IonTitle, 
+    IonButtons, 
+    IonButton, 
+    IonIcon, 
+    IonSearchbar, 
+    IonMenuButton, 
+    IonLabel, 
+    IonContent,
+    IonItem,
+    IonList,
+    IonMenu,
+    ProfilePopoverComponent
+  ]
 })
-export class HomeToolbarComponent implements OnInit {
+export class HomeToolbarComponent {
   isLoggedIn$: Observable<boolean>;
-  isPopoverOpen = false;
   usuarioNombre$: Observable<string>;
-  popoverEvent: any;
 
-  constructor(private menuCtrl: MenuController, private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private searchService: SearchService,
+    private menuCtrl: MenuController,
+    private popoverCtrl: PopoverController
+  ) {
     addIcons({
-      personCircle, searchOutline, cubeOutline, heartOutline, logInOutline, personAddOutline,
-      logOutOutline, personCircleOutline
+      personCircle, 
+      searchOutline, 
+      cubeOutline, 
+      heartOutline, 
+      logInOutline, 
+      personAddOutline,
+      logOutOutline, 
+      personCircleOutline
     });
     this.isLoggedIn$ = this.authService.isLoggedIn();
     this.usuarioNombre$ = this.authService.getUsuarioNombre();
   }
 
-  ngOnInit() {
+  onSearch(event: any) {
+    const term = event.target.value.toLowerCase();
+    this.searchService.updateSearchTerm(term);
+  }
+
+  async openPopover(e: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ProfilePopoverComponent,
+      event: e,
+      translucent: true
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    if (data === 'profile') {
+      this.goToProfile();
+    } else if (data === 'logout') {
+      this.logout();
+    }
   }
 
   onClick() {
-    console.log('Menu clicked');
-    this.menuCtrl.open('home-toolbar-menu');  
+    this.menuCtrl.toggle('home-toolbar-menu');
   }
 
-  goToBaul() {
-    console.log('Baul clicked');
-    this.router.navigate(['/baul']);
+  goToProfile() {
+    this.menuCtrl.close('home-toolbar-menu');
+    this.router.navigate(['/perfil']);
+  }
+
+  logout() {
+    this.menuCtrl.close('home-toolbar-menu');
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   goToDonaciones() {
-    console.log('Donaciones clicked');
+    this.menuCtrl.close('home-toolbar-menu');
     this.router.navigate(['/donaciones']);
   }
 
+  goToBaul() {
+    this.menuCtrl.close('home-toolbar-menu');
+    this.router.navigate(['/baul']);
+  }
+
   goToLogin() {
-    console.log('Iniciar Sesion clicked');
+    this.menuCtrl.close('home-toolbar-menu');
     this.router.navigate(['/login']);
   }
 
   goToRegister() {
-    console.log('Registrarse clicked');
+    this.menuCtrl.close('home-toolbar-menu');
     this.router.navigate(['/register']);
-  }
-
-  openPopover(ev: Event) {
-    this.popoverEvent = ev;
-    this.isPopoverOpen = true;
-  }
-
-  // Redirigir a la página de perfil y cerrar menús
-  async goToProfile() {
-    this.isPopoverOpen = false;
-    await this.menuCtrl.close('home-toolbar-menu');
-    this.router.navigate(['/perfil']);
-  }
-
-  // Cerrar sesión
-  async logout() {
-    this.isPopoverOpen = false;
-    await this.menuCtrl.close('home-toolbar-menu');
-    this.authService.logout();
-    this.router.navigate(['/home']);
   }
 }

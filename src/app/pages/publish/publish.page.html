@@ -41,9 +41,21 @@
       <ion-item class="campoRe">
         <ion-label class="anton" style="color:#7C7C7C;">Categoria:</ion-label>
         <ion-select [(ngModel)]="producto.Categoria" style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
-          <ion-select-option class="anton_option" value="papeleria">Papeleria</ion-select-option>
+          <ion-select-option class="anton_option" value="papeleria">Papelería</ion-select-option>
           <ion-select-option class="anton_option" value="electronica">Electrónica</ion-select-option>
+          <ion-select-option class="anton_option" value="utiles">Útiles Básicos</ion-select-option>
+          <ion-select-option class="anton_option" value="uniformes">Uniformes</ion-select-option>
+          <ion-select-option class="anton_option" value="mobiliario">Mobiliario</ion-select-option>
+          <ion-select-option class="anton_option" value="material">Material Didáctico</ion-select-option>
           <ion-select-option class="anton_option" value="otros">Otros</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="campoRe">
+        <ion-label class="anton" style="color:#7C7C7C;">Estado:</ion-label>
+        <ion-select [(ngModel)]="producto.Estado" style="color: #7C7C7C;" interface="popover" slot="end" class="anton">
+          <ion-select-option class="anton_option" value="Disponible">Disponible</ion-select-option>
+          <ion-select-option class="anton_option" value="No disponible">No disponible</ion-select-option>
         </ion-select>
       </ion-item>
 

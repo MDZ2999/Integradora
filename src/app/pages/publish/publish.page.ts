@@ -27,6 +27,7 @@ export class PublishPage implements OnInit {
     Calidad: '',
     Categoria: '',
     Descripcion: '',
+    Estado: 'Disponible',
     Imagen: {
       nombre: '',
       contenido: ''
@@ -83,6 +84,7 @@ export class PublishPage implements OnInit {
       this.producto.Calidad &&
       this.producto.Categoria &&
       this.producto.Descripcion &&
+      this.producto.Estado &&
       this.producto.Imagen.contenido
     );
   }
