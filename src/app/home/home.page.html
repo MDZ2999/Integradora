@@ -18,47 +18,52 @@
         </ion-button>
       </div>
 
-      <!-- Botones para pantallas medianas y grandes -->
+      <!-- Contenedor principal para pantallas medianas y grandes -->
       <div class="buttons-container-large hide-on-sm">
-        <ion-button (click)="toggleSubcategories()" class="category-btn">
-          <ion-icon name="reorder-three-outline"></ion-icon>
-          <span>Categorías</span>
-        </ion-button>
+        <!-- Contenedor izquierdo para botones de categorías -->
+        <div class="categories-container">
+          <ion-button (click)="toggleSubcategories()" class="category-btn">
+            <ion-icon name="reorder-three-outline"></ion-icon>
+            <span>Categorías</span>
+          </ion-button>
 
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'papeleria'" (click)="onCategorySelect('papeleria')">
-          <ion-icon name="pencil-outline"></ion-icon>
-          <span>Papelería</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'electronica'" (click)="onCategorySelect('electronica')">
-          <ion-icon name="hardware-chip-outline"></ion-icon>
-          <span>Electrónica</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'utiles'" (click)="onCategorySelect('utiles')">
-          <ion-icon name="book-outline"></ion-icon>
-          <span>Útiles Básicos</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'uniformes'" (click)="onCategorySelect('uniformes')">
-          <ion-icon name="shirt-outline"></ion-icon>
-          <span>Uniformes</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'mobiliario'" (click)="onCategorySelect('mobiliario')">
-          <ion-icon name="desktop-outline"></ion-icon>
-          <span>Mobiliario</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'material'" (click)="onCategorySelect('material')">
-          <ion-icon name="school-outline"></ion-icon>
-          <span>Material Didáctico</span>
-        </ion-button>
-        <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'otros'" (click)="onCategorySelect('otros')">
-          <ion-icon name="reorder-three-outline"></ion-icon>
-          <span>Otros</span>
-        </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'papeleria'" (click)="onCategorySelect('papeleria')">
+            <ion-icon name="pencil-outline"></ion-icon>
+            <span>Papelería</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'electronica'" (click)="onCategorySelect('electronica')">
+            <ion-icon name="hardware-chip-outline"></ion-icon>
+            <span>Electrónica</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'utiles'" (click)="onCategorySelect('utiles')">
+            <ion-icon name="book-outline"></ion-icon>
+            <span>Útiles Básicos</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'uniformes'" (click)="onCategorySelect('uniformes')">
+            <ion-icon name="shirt-outline"></ion-icon>
+            <span>Uniformes</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'mobiliario'" (click)="onCategorySelect('mobiliario')">
+            <ion-icon name="desktop-outline"></ion-icon>
+            <span>Mobiliario</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'material'" (click)="onCategorySelect('material')">
+            <ion-icon name="school-outline"></ion-icon>
+            <span>Material Didáctico</span>
+          </ion-button>
+          <ion-button class="subcategory-btn" [class.show]="showSubcategories" [class.selected]="categoriaSeleccionada === 'otros'" (click)="onCategorySelect('otros')">
+            <ion-icon name="reorder-three-outline"></ion-icon>
+            <span>Otros</span>
+          </ion-button>
+        </div>
 
-        <!-- Botón Donar para pantallas grandes -->
-        <ion-button slot="end" *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
-          <ion-icon name="heart"></ion-icon>
-          <span>Donar</span>
-        </ion-button>
+        <!-- Contenedor derecho para el botón donar -->
+        <div class="donate-container">
+          <ion-button *ngIf="isLoggedIn$ | async" class="donate-btn" (click)="goToPublish()">
+            <ion-icon name="heart"></ion-icon>
+            <span>Donar</span>
+          </ion-button>
+        </div>
       </div>
     </div>
   </div>
@@ -67,7 +72,7 @@
   <ion-grid>
     <ion-row>
       @for (producto of productos; track producto._id) {
-        <ion-col size="6" size-md="4" size-lg="4">
+        <ion-col size="12" size-md="4" size-lg="3" size-xl="2.4">
           <app-product-card [producto]="producto"></app-product-card>
         </ion-col>
       }

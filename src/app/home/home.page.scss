@@ -18,11 +18,23 @@ ion-content {
 
 .buttons-container-large {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
+  position: relative;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.donate-container {
+  position: relative;
+  margin-left: auto;
+  padding-left: 16px;
 }
 
 .small-screen-buttons {
@@ -84,16 +96,16 @@ ion-content {
 .donate-btn {
   --background: #FFABAB;
   --color: #750C0C;
-  font-family: 'Fredoka One', sans-serif;
-  font-size: 13px;
-  width: 120px;
   height: 36px;
+  font-size: 13px;
+  font-family: 'Fredoka One', sans-serif;
+  margin: 0;
+  width: 120px;
   border-radius: 8px !important;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 0;
   padding: 0;
   flex-shrink: 0;
 
@@ -171,6 +183,28 @@ ion-content {
 
 .hide-on-lg {
   @media (min-width: 992px) {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-on-sm {
+    display: none !important;
+  }
+  
+  .show-on-sm {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-on-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .hide-on-lg {
     display: none !important;
   }
 }
