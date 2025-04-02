@@ -7,8 +7,14 @@
 
   <!-- Derecha -->
   <ion-buttons slot="end">
-    <ion-searchbar class="searchbar hide-on-sm" *ngIf="isLoggedIn$ | async"></ion-searchbar>
-    <ion-searchbar class="searchbarSM show-on-sm hide-on-lg hide-on-md" *ngIf="isLoggedIn$ | async"></ion-searchbar>
+    <ion-searchbar class="searchbar hide-on-sm" 
+                  *ngIf="isLoggedIn$ | async"
+                  (ionInput)="onSearch($event)"
+                  placeholder="Buscar productos..."></ion-searchbar>
+    <ion-searchbar class="searchbarSM show-on-sm hide-on-lg hide-on-md" 
+                  *ngIf="isLoggedIn$ | async"
+                  (ionInput)="onSearch($event)"
+                  placeholder="Buscar productos..."></ion-searchbar>
 
     <!-- Botones visibles solo en pantallas grandes -->
     <ion-button (click)="goToDonaciones()" class="toolbar-btn hide-on-md" *ngIf="isLoggedIn$ | async">
@@ -33,58 +39,6 @@
       REGISTRARSE
     </ion-button>
     <!-- Botón de menú (Solo en medianas y pequeñas) -->
-    <ion-menu-button (click)="onClick()" class="menu-btn show-on-md hide-on-lg"></ion-menu-button>
+    <ion-menu-button menu="home-toolbar-menu" class="menu-btn show-on-md hide-on-lg"></ion-menu-button>
   </ion-buttons>
 </ion-toolbar>
-
-<!-- Menú lateral (Visible solo en medianas y pequeñas) -->
-<ion-menu side="end" contentId="main-content" menuId="home-toolbar-menu">
-  <ion-content class="ion-padding">
-    <ion-list>
-      <ion-item (click)="goToDonaciones()" button *ngIf="isLoggedIn$ | async">
-        <ion-icon name="heart-outline" class="profile-icon"></ion-icon>
-        <ion-label>MIS DONACIONES</ion-label>
-      </ion-item>
-      <ion-item (click)="goToBaul()" button *ngIf="isLoggedIn$ | async">
-        <ion-icon name="cube-outline" class="profile-icon"></ion-icon>
-        <ion-label>MI BAÚL</ion-label>
-      </ion-item>
-      <ion-item (click)="goToProfile()" button *ngIf="isLoggedIn$ | async">
-        <ion-icon name="person-circle" class="profile-icon"></ion-icon>
-        <ion-label>PERFIL</ion-label>
-      </ion-item>
-      <ion-item (click)="logout()" button *ngIf="isLoggedIn$ | async">
-        <ion-icon name="log-out-outline" class="profile-icon"></ion-icon>
-        <ion-label>CERRAR SESIÓN</ion-label>
-      </ion-item>
-      <ion-item (click)="goToLogin()" *ngIf="!(isLoggedIn$ | async)">
-        <ion-icon name="log-in-outline" class="profile-icon"></ion-icon>
-        <ion-label>INICIAR SESIÓN</ion-label>
-      </ion-item>
-      <ion-item button (click)="goToRegister()" *ngIf="!(isLoggedIn$ | async)">
-        <ion-icon name="person-add-outline" class="profile-icon"></ion-icon>
-        <ion-label>REGISTRARSE</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<!-- Contenido principal -->
-<ion-content id="main-content">
-  <!-- Aquí va tu contenido principal -->
-  <!-- Popover -->
-  <ion-popover [isOpen]="isPopoverOpen" [event]="popoverEvent" (didDismiss)="isPopoverOpen = false">
-    <ng-template>
-      <ion-list>
-        <ion-item button (click)="goToProfile()">
-          <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
-          <ion-label>Mi Perfil</ion-label>
-        </ion-item>
-        <ion-item button (click)="logout()">
-          <ion-icon name="log-out-outline" class="profile-icon"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
-        </ion-item>
-      </ion-list>
-    </ng-template>
-  </ion-popover>
-</ion-content>

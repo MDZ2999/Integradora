@@ -5,15 +5,14 @@ export interface Usuario {
 }
 
 export interface Producto {
-  _id: string;
+  _id?: string;
   Nom_producto: string;
-  id_usuarios: Usuario;
-  Imagen: string;
-  Cantidad: number;
-  Municipio: string;
-  Codigo_postal: number;
-  Numero_telefonico: number;
-  Calidad: string;
-  Categoria: string;
   Descripcion: string;
+  Categoria: string;
+  Cantidad: number;
+  Estado: 'Disponible' | 'No disponible';
+  id_usuarios: any;
+  Imagen?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

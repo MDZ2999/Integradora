@@ -10,4 +10,8 @@
   <img [src]="getImagenProducto()"
       [alt]="producto?.Nom_producto || 'Producto'"
       class="card-image" />
+  <!-- Nombre del producto -->
+  <div class="product-name">
+    {{ producto?.Nom_producto || 'Producto' }}
+  </div>
 </ion-card>
