@@ -1,0 +1,87 @@
+<ion-content [fullscreen]="true">
+  <div class="product-container">
+    <div class="unified-content">
+      <div class="image-section" [style.--dominant-color]="dominantColor" [style.--secondary-color]="secondaryColor">
+        <img [src]="currentImage" alt="Product Image" class="product-image"/>
+      </div>
+
+      <div class="info-section">
+        <div class="product-header">
+          <ion-item color="transparent">
+            <ion-text class="product-title">{{ productDetails.title }}</ion-text>
+          </ion-item>
+          <div class="status-chip">
+            <ion-chip>
+              <ion-label>Estado: {{ productDetails.status }}</ion-label>
+            </ion-chip>
+          </div>
+          <div class="categories">
+            <ion-chip>
+              <ion-label>Categoría: {{ productDetails.category }}</ion-label>
+            </ion-chip>
+  
+            <ion-chip>
+              <ion-label>Calidad: {{ productDetails.quality }}</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+
+        <div class="details-info">
+          <ion-item>
+            <ion-label>
+              <h2>Municipio:</h2>
+              <p>{{ productDetails.municipio }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>Cantidad:</h2>
+              <p>{{ productDetails.cantidad }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>Código Postal:</h2>
+              <p>{{ productDetails.codigoPostal }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>Descripción:</h2>
+              <p>{{ productDetails.descripcion }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item class="donor-item">
+            <ion-avatar slot="start">
+              <img [src]="productDetails.images" alt="Foto de perfil">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="donor-name">Donador</h3>
+              <p>{{ productDetails.title }}</p>
+            </ion-label>
+            <div slot="end" class="rating">
+              <ion-icon name="star" color="warning"></ion-icon>
+              <ion-icon name="star" color="warning"></ion-icon>
+              <ion-icon name="star" color="warning"></ion-icon>
+              <ion-icon name="star" color="warning"></ion-icon>
+              <ion-icon name="star" color="warning"></ion-icon>
+            </div>
+          </ion-item>
+          
+          <div class="button-container">
+            <ion-button class="save-button" expand="block">
+              Guardar
+            </ion-button>
+            <ion-button class="obtain-button" expand="block">
+              Obtener
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
