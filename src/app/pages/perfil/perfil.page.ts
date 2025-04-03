@@ -10,8 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/models/productos.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
-// Definir la interfaz para el elemento Swiper
 interface SwiperContainer extends HTMLElement {
   initialize: () => void;
 }
@@ -35,12 +35,14 @@ interface SwiperContainer extends HTMLElement {
     IonLabel,
     IonText
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Necesario para los elementos personalizados de Swiper
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PerfilPage implements OnInit {
   userProducts: Producto[] = [];
   userName: string = '';
   userImage: string = '';
+  private readonly CACHE_KEY = 'user_profile_data';
+  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
   
   slideOpts = {
     initialSlide: 0,
@@ -52,7 +54,6 @@ export class PerfilPage implements OnInit {
     autoHeight: true,
     pagination: false,
     breakpoints: {
-      // cuando la pantalla es más grande que 768px
       768: {
         spaceBetween: 30,  
       }
@@ -62,60 +63,121 @@ export class PerfilPage implements OnInit {
   constructor(
     private authService: AuthService,
     private productosService: ProductosService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {
     addIcons({ star });
   }
 
   ngOnInit() {
-    // Obtener datos del usuario
-    this.authService.getUsuarioNombre().subscribe(nombre => {
-      this.userName = nombre;
-    });
-
-    // Obtener productos del usuario
-    this.loadUserProducts();
+    this.loadFromCache();
+    this.loadUserData();
   }
 
-  getImagenUsuario(): SafeUrl {
-    // Obtener el primer producto que tenga datos de usuario
-    const usuarioConImagen = this.userProducts.find(p => p.id_usuarios?.Imagen);
-    
-    if (!usuarioConImagen?.id_usuarios?.Imagen) {
-      console.log('No se encontró imagen de usuario, usando default');
-      return '../../../assets/img/Perfil.jpeg';
+  private loadFromCache() {
+    const cached = localStorage.getItem(this.CACHE_KEY);
+    if (cached) {
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp < this.CACHE_DURATION) {
+        console.log('📦 Cargando datos del perfil desde caché');
+        this.userProducts = data.products;
+        this.userName = data.name;
+        this.userImage = data.image;
+        return true;
+      }
     }
-
-    console.log('Usando imagen de usuario:', usuarioConImagen.id_usuarios.Imagen.substring(0, 30) + '...');
-    return this.sanitizer.bypassSecurityTrustUrl(usuarioConImagen.id_usuarios.Imagen);
+    return false;
   }
 
-  getImagenProducto(producto: Producto): SafeUrl {
-    if (!producto?.Imagen) {
-      console.log('No se encontró imagen para el producto:', producto.Nom_producto);
-      return '../../../assets/img/card.jpeg';
-    }
-
-    console.log('Usando imagen para producto:', producto.Nom_producto);
-    return this.sanitizer.bypassSecurityTrustUrl(producto.Imagen);
+  private saveToCache() {
+    const cacheData = {
+      data: {
+        products: this.userProducts,
+        name: this.userName,
+        image: this.userImage
+      },
+      timestamp: Date.now()
+    };
+    localStorage.setItem(this.CACHE_KEY, JSON.stringify(cacheData));
+    console.log('💾 Datos y productos del perfil guardados en caché');
   }
 
-  async loadUserProducts() {
+  private async loadUserData() {
     try {
       const userId = await this.authService.getUsuarioIdPromise();
       if (userId) {
+        // Cargar nombre del usuario
+        this.authService.getUsuarioNombre().subscribe(nombre => {
+          this.userName = nombre;
+          console.log('👤 Información del Usuario:');
+          console.log('ID del usuario:', userId);
+          console.log('Nombre del usuario:', nombre);
+          this.saveToCache();
+        });
+
+        // Cargar productos y datos del usuario
         this.productosService.getProductosByUserId(userId).subscribe(
           (productos: Producto[]) => {
             this.userProducts = productos;
-            console.log('Productos cargados:', productos);
+            
+            // Actualizar imagen del usuario si está disponible
+            const userWithImage = productos.find(p => p.id_usuarios?.Imagen);
+            if (userWithImage?.id_usuarios?.Imagen) {
+              this.userImage = userWithImage.id_usuarios.Imagen;
+            }
+
+            console.log('👤 Información completa del usuario:');
+            console.log('ID del usuario:', userId);
+            console.log('Nombre del usuario:', this.userName);
+            console.log('Imagen del usuario:', this.userImage);
+            console.log('📦 Productos del usuario:', productos.map(p => ({
+              id: p.id,
+              nombre: p.Nom_producto,
+              imagen: p.Imagen,
+              categoria: p.Categoria
+            })));
+
+            this.saveToCache();
           },
           (error: Error) => {
-            console.error('Error al cargar los productos:', error);
+            console.error('❌ Error al cargar los productos:', error);
           }
         );
       }
     } catch (error: unknown) {
-      console.error('Error al obtener el ID del usuario:', error);
+      console.error('❌ Error al obtener el ID del usuario:', error);
     }
+  }
+
+  getImagenUsuario(): SafeUrl {
+    if (this.userImage) {
+      return this.sanitizer.bypassSecurityTrustUrl(this.userImage);
+    }
+
+    const usuarioConImagen = this.userProducts.find(p => p.id_usuarios?.Imagen);
+    if (usuarioConImagen?.id_usuarios?.Imagen) {
+      this.userImage = usuarioConImagen.id_usuarios.Imagen;
+      console.log('🖼️ Usando imagen de usuario:', this.userImage);
+      return this.sanitizer.bypassSecurityTrustUrl(this.userImage);
+    }
+
+    console.log('🖼️ No se encontró imagen de usuario, usando default');
+    return '../../../assets/img/Perfil.jpeg';
+  }
+
+  getImagenProducto(producto: Producto): SafeUrl {
+    if (!producto?.Imagen) {
+      return '../../../assets/img/card.jpeg';
+    }
+    return this.sanitizer.bypassSecurityTrustUrl(producto.Imagen);
+  }
+
+  editarPerfil() {
+    this.router.navigate(['/configure-perfil']);
+  }
+
+  clearCache() {
+    localStorage.removeItem(this.CACHE_KEY);
+    this.loadUserData();
   }
 }

@@ -23,6 +23,85 @@ const upload = multer({
 // JWT Secret
 const JWT_SECRET = process.env.JWT_SECRET || 'tu_secret_key';
 
+// Middleware para verificar el token JWT
+const verificarToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'No se proporcionó token de autenticación' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Token inválido' });
+  }
+};
+
+// Ruta para obtener datos del usuario
+router.get('/usuarios/:id', verificarToken, async (req, res) => {
+  try {
+    const usuario = await Usuarios.findById(req.params.id);
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    
+    // No enviar la contraseña
+    const usuarioData = {
+      _id: usuario._id,
+      nombre: usuario.Nombre,
+      apellidoPaterno: usuario.Apellido_paterno,
+      apellidoMaterno: usuario.Apellido_materno,
+      correo: usuario.Correo,
+      foto: usuario.Imagen ? {
+        url: `data:image/jpeg;base64,${usuario.Imagen.toString('base64')}`,
+        filename: 'profile.jpg'
+      } : null
+    };
+
+    res.json(usuarioData);
+  } catch (error) {
+    console.error('Error al obtener usuario:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
+
+// Ruta para actualizar datos del usuario
+router.put('/usuarios/:id', verificarToken, upload.single('foto'), async (req, res) => {
+  try {
+    const usuario = await Usuarios.findById(req.params.id);
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Verificar que el usuario autenticado solo pueda modificar su propio perfil
+    if (req.userId !== req.params.id) {
+      return res.status(403).json({ message: 'No autorizado para modificar este perfil' });
+    }
+
+    // Actualizar solo los campos proporcionados
+    if (req.body.nombre) usuario.Nombre = req.body.nombre;
+    if (req.body.apellidoPaterno) usuario.Apellido_paterno = req.body.apellidoPaterno;
+    if (req.body.apellidoMaterno) usuario.Apellido_materno = req.body.apellidoMaterno;
+    if (req.body.correo) usuario.Correo = req.body.correo.toLowerCase();
+    if (req.body.contrasena) {
+      const salt = await bcrypt.genSalt(10);
+      usuario.Contrasena = await bcrypt.hash(req.body.contrasena, salt);
+    }
+    if (req.file) {
+      usuario.Imagen = req.file.buffer;
+    }
+
+    await usuario.save();
+    res.json({ message: 'Perfil actualizado exitosamente' });
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
+
 // Ruta para registrar un nuevo usuario
 router.post('/register', upload.single('Imagen'), async (req, res) => {
   try {

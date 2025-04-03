@@ -10,6 +10,7 @@ interface LoginResponse {
     id: string;
     nombre: string;
     correo: string;
+    imagen: string;
   };
 }
 
@@ -20,73 +21,82 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   private usuarioId: string | null = null;
   private usuarioNombreSubject = new BehaviorSubject<string>('');
+  private usuarioImagenSubject = new BehaviorSubject<string>('');
 
   private apiUrl = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient) {
+    this.loadUserData();
+  }
+
+  private loadUserData() {
     const loggedIn = localStorage.getItem('userLoggedIn') === 'true';
     this.isLoggedInSubject.next(loggedIn);
     this.usuarioId = localStorage.getItem('usuarioId');
     const storedNombre = localStorage.getItem('usuarioNombre') || '';
+    const storedImagen = localStorage.getItem('usuarioImagen') || '';
     this.usuarioNombreSubject.next(storedNombre);
+    this.usuarioImagenSubject.next(storedImagen);
   }
 
-  // Iniciar sesión
   login(correo: string, contrasena: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { correo, contrasena });
   }
 
-  // Registrar nuevo usuario
   register(formData: FormData): Observable<{ message: string, usuarioId: string }> {
     return this.http.post<{ message: string, usuarioId: string }>(`${this.apiUrl}/register`, formData);
   }
 
-  // Actualizar estado de sesión
-  updateSessionState(loggedIn: boolean, nombre: string = '', token?: string) {
+  updateSessionState(loggedIn: boolean, usuario?: { nombre: string; id: string; imagen?: string }, token?: string) {
     this.isLoggedInSubject.next(loggedIn);
-    this.usuarioNombreSubject.next(nombre);
-    localStorage.setItem('userLoggedIn', loggedIn ? 'true' : 'false');
-    if (nombre) {
-      localStorage.setItem('usuarioNombre', nombre);
+    
+    if (usuario) {
+      this.usuarioNombreSubject.next(usuario.nombre);
+      this.usuarioId = usuario.id;
+      if (usuario.imagen) {
+        this.usuarioImagenSubject.next(usuario.imagen);
+        localStorage.setItem('usuarioImagen', usuario.imagen);
+      }
+      localStorage.setItem('usuarioNombre', usuario.nombre);
+      localStorage.setItem('usuarioId', usuario.id);
     }
+    
     if (token) {
       localStorage.setItem('token', token);
     }
+    
+    localStorage.setItem('userLoggedIn', loggedIn ? 'true' : 'false');
   }
 
-  // Obtener token
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // Verificar si está autenticado
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
-  // Cerrar sesión
   logout() {
     localStorage.removeItem('userLoggedIn');
     localStorage.removeItem('userData');
     localStorage.removeItem('usuarioId');
     localStorage.removeItem('usuarioNombre');
+    localStorage.removeItem('usuarioImagen');
     localStorage.removeItem('token');
     this.isLoggedInSubject.next(false);
     this.usuarioNombreSubject.next('');
+    this.usuarioImagenSubject.next('');
   }
 
-  // Obtener ID del usuario actual
   getUsuarioId(): string | null {
-    return localStorage.getItem('usuarioId');
+    return this.usuarioId;
   }
 
-  // Establecer ID del usuario
   setUsuarioId(id: string) {
     this.usuarioId = id;
     localStorage.setItem('usuarioId', id);
   }
 
-  // Getters para observables
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
   }
@@ -100,7 +110,6 @@ export class AuthService {
   }
 
   getUsuarioImagen(): Observable<string> {
-    // Por ahora retornamos una imagen por defecto
-    return new BehaviorSubject<string>('../../../assets/img/Perfil.jpeg').asObservable();
+    return this.usuarioImagenSubject.asObservable();
   }
 }

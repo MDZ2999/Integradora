@@ -56,17 +56,18 @@ export class LoginPage implements OnInit {
       const response = await this.authService.login(this.correo.toLowerCase(), this.contrasena).toPromise();
       
       if (response) {
-        //Guardar estado de sesion
-        localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('userData', JSON.stringify(response.usuario));
-        localStorage.setItem('usuarioId', response.usuario.id);
-        localStorage.setItem('usuarioNombre', response.usuario.nombre);
-        this.authService.updateSessionState(true, response.usuario.nombre, response.token);
+        // Actualizar estado de sesión con todos los datos del usuario
+        this.authService.updateSessionState(true, {
+          id: response.usuario.id,
+          nombre: response.usuario.nombre,
+          imagen: response.usuario.imagen
+        }, response.token);
 
         await this.presentAlert('¡Éxito!', 'Inicio de sesión exitoso', true);
         this.router.navigate(['/home']);
       }
     } catch (error: any) {
+      console.error('Error durante el login:', error);
       await this.presentAlert(
         'Error', 
         error.error?.message || 'Error al iniciar sesión'
