@@ -180,4 +180,9 @@ export class PerfilPage implements OnInit {
     localStorage.removeItem(this.CACHE_KEY);
     this.loadUserData();
   }
+
+  onCardClick(producto: Producto) {
+    localStorage.setItem('selectedProduct', JSON.stringify(producto));
+    this.router.navigate(['/detail-card']);
+  }
 }

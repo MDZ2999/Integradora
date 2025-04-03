@@ -16,7 +16,7 @@
         <p class="register-text">AUN NO HAS HECHO NINGUNA DONACION</p>
       </div>
       <div *ngIf="userProducts.length > 0" class="productos-grid">
-        <ion-card *ngFor="let producto of userProducts" class="producto-card">
+        <ion-card *ngFor="let producto of userProducts" (click)="onCardClick(producto)" class="producto-card">
           <img [src]="producto.Imagen" [alt]="producto.Nom_producto" class="producto-imagen">
           <ion-card-content>
             <p class="producto-nombre">Nombre: {{producto.Nom_producto}}</p>

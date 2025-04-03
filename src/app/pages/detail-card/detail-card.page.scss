@@ -5,18 +5,21 @@
 }
 
 ion-content {
-  --padding-start: 0;
-  --padding-end: 0;
-  --padding-top: 0;
-  --padding-bottom: 0;
+  --background: #f4f5f8;
 }
 
 .product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  background-color: #7C7C7C;
-  padding: 20px;
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 .product-header {
@@ -106,7 +109,7 @@ ion-content {
     align-items: center;
     padding: 20px;
     flex: 1;
-    min-height: 300px;
+    min-height: 100%;
 
     &::before {
       content: '';
@@ -121,7 +124,7 @@ ion-content {
 
     .product-image {
       max-width: 100%;
-      max-height: 100%;
+      min-height: 100%;
       width: auto;
       height: auto;
       object-fit: contain;
@@ -323,6 +326,185 @@ ion-content {
         font-size: 16px;
       }
     }
+  }
+}
+
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: calc(100vh - 40px);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.image-section {
+  flex: 1;
+  background: linear-gradient(135deg, var(--dominant-color, #00C2BA), var(--secondary-color, #F7B495));
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+}
+
+.info-section {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  .product-header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .product-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 16px;
+    }
+  }
+
+  .chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+
+    .status-chip {
+      --background: #2dd36f;
+      --color: white;
+      font-weight: 500;
+    }
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+
+    ion-item {
+      --background: transparent;
+      --padding-start: 0;
+
+      h2 {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 4px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #333;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .donor-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 12px;
+
+    .donor-details {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .donor-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .donor-name {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .whatsapp-btn {
+      --background: #25D366;
+      --border-radius: 50%;
+      margin: 0;
+      width: 48px;
+      height: 48px;
+      --padding-start: 0;
+      --padding-end: 0;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .description {
+    margin-top: 20px;
+    
+    h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+  }
+}
+
+.no-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  p {
+    color: #666;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .detail-container {
+    padding: 10px;
+  }
+
+  .image-section {
+    min-height: 300px;
   }
 }
 

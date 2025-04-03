@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 interface LoginResponse {
@@ -14,6 +15,12 @@ interface LoginResponse {
   };
 }
 
+interface UpdateProfileResponse {
+  imagen?: string;
+  mensaje?: string;
+  error?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +30,7 @@ export class AuthService {
   private usuarioNombreSubject = new BehaviorSubject<string>('');
   private usuarioImagenSubject = new BehaviorSubject<string>('');
 
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = environment.backendUrl + '/api/auth';
 
   constructor(private http: HttpClient) {
     this.loadUserData();
@@ -39,12 +46,67 @@ export class AuthService {
     this.usuarioImagenSubject.next(storedImagen);
   }
 
+  private getHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   login(correo: string, contrasena: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { correo, contrasena });
   }
 
   register(formData: FormData): Observable<{ message: string, usuarioId: string }> {
     return this.http.post<{ message: string, usuarioId: string }>(`${this.apiUrl}/register`, formData);
+  }
+
+  updateProfile(userId: string, formData: FormData): Observable<UpdateProfileResponse> {
+    const headers = this.getHeaders();
+    
+    // Log del FormData para debugging
+    console.log('FormData contenido:');
+    formData.forEach((value, key) => {
+      if (key === 'imagen') {
+        const file = value as File;
+        console.log(key, ':', file.name, 'tipo:', file.type, 'tamaño:', file.size);
+      } else {
+        console.log(key, ':', value);
+      }
+    });
+
+    return this.http.put<UpdateProfileResponse>(`${this.apiUrl}/usuarios/${userId}`, formData, { headers }).pipe(
+      tap(response => {
+        console.log('Respuesta del servidor:', response);
+        
+        // Actualizar el estado local solo si la respuesta es exitosa
+        const nombre = formData.get('nombre') as string;
+        if (nombre) {
+          const apellidoPaterno = formData.get('apellidoPaterno') as string;
+          const apellidoMaterno = formData.get('apellidoMaterno') as string;
+          const nombreCompleto = `${nombre} ${apellidoPaterno} ${apellidoMaterno}`.trim();
+          this.usuarioNombreSubject.next(nombreCompleto);
+          localStorage.setItem('usuarioNombre', nombreCompleto);
+        }
+
+        // Si hay una nueva imagen, actualizar la URL de la imagen
+        if (response && response.imagen) {
+          console.log('Nueva URL de imagen:', response.imagen);
+          this.usuarioImagenSubject.next(response.imagen);
+          localStorage.setItem('usuarioImagen', response.imagen);
+        }
+      }),
+      catchError(error => {
+        console.error('Error en updateProfile:', error);
+        if (error.error && error.error.message) {
+          console.error('Mensaje del servidor:', error.error.message);
+        }
+        return throwError(() => ({
+          error: error.error?.message || 'Error al actualizar el perfil',
+          status: error.status
+        }));
+      })
+    );
   }
 
   updateSessionState(loggedIn: boolean, usuario?: { nombre: string; id: string; imagen?: string }, token?: string) {
@@ -92,6 +154,10 @@ export class AuthService {
     return this.usuarioId;
   }
 
+  getUsuarioIdPromise(): Promise<string | null> {
+    return Promise.resolve(this.usuarioId);
+  }
+
   setUsuarioId(id: string) {
     this.usuarioId = id;
     localStorage.setItem('usuarioId', id);
@@ -103,10 +169,6 @@ export class AuthService {
 
   getUsuarioNombre(): Observable<string> {
     return this.usuarioNombreSubject.asObservable();
-  }
-
-  getUsuarioIdPromise(): Promise<string | null> {
-    return Promise.resolve(this.usuarioId);
   }
 
   getUsuarioImagen(): Observable<string> {

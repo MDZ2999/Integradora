@@ -3,6 +3,7 @@ import { IonCard } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Producto } from '../../models/productos.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +15,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class ProductCardComponent implements OnInit {
   @Input({required:true}) producto!: Producto;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     if (!this.producto) {
@@ -30,6 +34,13 @@ export class ProductCardComponent implements OnInit {
       imagenUsuario: this.producto.id_usuarios?.Imagen?.substring(0, 30) + '...',
       imagenProducto: this.producto.Imagen?.substring(0, 30) + '...'
     });
+  }
+
+  onCardClick() {
+    // Guardar el producto en localStorage
+    localStorage.setItem('selectedProduct', JSON.stringify(this.producto));
+    // Navegar al detalle
+    this.router.navigate(['/detail-card']);
   }
 
   getImagenUsuario(): SafeUrl {

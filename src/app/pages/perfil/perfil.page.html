@@ -28,7 +28,7 @@
       <h2 class="anton">Donaciones:</h2>
       <swiper-container init="true">
         <swiper-slide *ngFor="let producto of userProducts">
-          <ion-card>
+          <ion-card (click)="onCardClick(producto)">
             <img [src]="getImagenProducto(producto)" 
                  [alt]="producto.Nom_producto"
                  loading="lazy">

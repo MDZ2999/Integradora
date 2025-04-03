@@ -8,6 +8,7 @@ import { arrowBackOutline } from 'ionicons/icons';
 import { ProductosService } from '../../services/productos.service';
 import { AuthService } from '../../services/auth.service';
 import { Producto } from '../../models/productos.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-donaciones',
@@ -24,7 +25,8 @@ export class DonacionesPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private productosService: ProductosService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     addIcons({arrowBackOutline});
   }
@@ -68,5 +70,10 @@ export class DonacionesPage implements OnInit {
     setTimeout(() => {
       this.navCtrl.back();
     }, 500);
+  }
+
+  onCardClick(producto: Producto) {
+    localStorage.setItem('selectedProduct', JSON.stringify(producto));
+    this.router.navigate(['/detail-card']);
   }
 }

@@ -1,87 +1,77 @@
-<ion-content [fullscreen]="true">
-  <div class="product-container">
-    <div class="unified-content">
-      <div class="image-section" [style.--dominant-color]="dominantColor" [style.--secondary-color]="secondaryColor">
-        <img [src]="currentImage" alt="Product Image" class="product-image"/>
-      </div>
+<ion-content>
+  <div class="detail-container" *ngIf="producto">
+    <!-- Sección de imagen -->
+    <div class="image-section" [style.--dominant-color]="dominantColor" [style.--secondary-color]="secondaryColor">
+      <img [src]="currentImage" [alt]="producto.Nom_producto" class="product-image"/>
+    </div>
 
-      <div class="info-section">
-        <div class="product-header">
-          <ion-item color="transparent">
-            <ion-text class="product-title">{{ productDetails.title }}</ion-text>
-          </ion-item>
-          <div class="status-chip">
-            <ion-chip>
-              <ion-label>Estado: {{ productDetails.status }}</ion-label>
-            </ion-chip>
-          </div>
-          <div class="categories">
-            <ion-chip>
-              <ion-label>Categoría: {{ productDetails.category }}</ion-label>
-            </ion-chip>
-  
-            <ion-chip>
-              <ion-label>Calidad: {{ productDetails.quality }}</ion-label>
-            </ion-chip>
-          </div>
+    <!-- Sección de información -->
+    <div class="info-section">
+      <!-- Encabezado del producto -->
+      <div class="product-header">
+        <ion-item color="transparent">
+          <ion-text class="product-title">{{ producto.Nom_producto }}</ion-text>
+        </ion-item>
+        
+        <!-- Estado, Categoría y Calidad -->
+        <div class="chips-container">
+          <ion-chip class="status-chip">
+            <ion-label>Estado: {{ producto.Estado }}</ion-label>
+          </ion-chip>
+          <ion-chip class="status-chip">
+            <ion-label>Categoría: {{ producto.Categoria }}</ion-label>
+          </ion-chip>
+          <ion-chip class="status-chip">
+            <ion-label>Calidad: {{ producto.Calidad || 'No especificada' }}</ion-label>
+          </ion-chip>
         </div>
 
-        <div class="details-info">
+        <!-- Detalles adicionales -->
+        <div class="details-grid">
           <ion-item>
             <ion-label>
               <h2>Municipio:</h2>
-              <p>{{ productDetails.municipio }}</p>
+              <p>{{ producto.Municipio || 'No especificado' }}</p>
             </ion-label>
           </ion-item>
 
           <ion-item>
             <ion-label>
               <h2>Cantidad:</h2>
-              <p>{{ productDetails.cantidad }}</p>
+              <p>{{ producto.Cantidad || 0 }}</p>
             </ion-label>
           </ion-item>
 
           <ion-item>
             <ion-label>
               <h2>Código Postal:</h2>
-              <p>{{ productDetails.codigoPostal }}</p>
+              <p>{{ producto.Codigo_postal || 'No especificado' }}</p>
             </ion-label>
           </ion-item>
+        </div>
 
-          <ion-item>
-            <ion-label>
-              <h2>Descripción:</h2>
-              <p>{{ productDetails.descripcion }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item class="donor-item">
-            <ion-avatar slot="start">
-              <img [src]="productDetails.images" alt="Foto de perfil">
-            </ion-avatar>
-            <ion-label>
-              <h3 class="donor-name">Donador</h3>
-              <p>{{ productDetails.title }}</p>
-            </ion-label>
-            <div slot="end" class="rating">
-              <ion-icon name="star" color="warning"></ion-icon>
-              <ion-icon name="star" color="warning"></ion-icon>
-              <ion-icon name="star" color="warning"></ion-icon>
-              <ion-icon name="star" color="warning"></ion-icon>
-              <ion-icon name="star" color="warning"></ion-icon>
-            </div>
-          </ion-item>
-          
-          <div class="button-container">
-            <ion-button class="save-button" expand="block">
-              Guardar
-            </ion-button>
-            <ion-button class="obtain-button" expand="block">
-              Obtener
-            </ion-button>
+        <!-- Información del donante -->
+        <div class="donor-info">
+          <div class="donor-details">
+            <img [src]="getImagenUsuario()" [alt]="getNombreUsuario()" class="donor-avatar"/>
+            <span class="donor-name">{{ getNombreUsuario() }}</span>
           </div>
+          <ion-button class="whatsapp-btn" (click)="abrirWhatsApp()">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </ion-button>
+        </div>
+
+        <!-- Descripción -->
+        <div class="description">
+          <h3>Descripción:</h3>
+          <p>{{ producto.Descripcion }}</p>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Mensaje si no hay producto -->
+  <div class="no-product" *ngIf="!producto">
+    <p>No se encontró información del producto</p>
   </div>
 </ion-content>
